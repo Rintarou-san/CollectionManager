@@ -1,1 +1,1 @@
-web: java -war target/collectionmanager-0.0.1-SNAPSHOT.war
+web: java -jar target/collectionmanager-0.0.1-SNAPSHOT.jar
