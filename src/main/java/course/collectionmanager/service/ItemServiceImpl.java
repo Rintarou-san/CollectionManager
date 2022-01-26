@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -13,6 +14,7 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private ItemRepository repository;
 
+    @Transactional
     @Override
     public List<Item> allItems() {
         List<Item> items = new ArrayList<>();
