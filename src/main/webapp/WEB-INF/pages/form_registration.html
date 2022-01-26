@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>WOW! Collection - Registration</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/resources/css/style_form.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-section">
+            <div class="row justify-content-center">
+                <h1 class="form-title">Registration</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-content">
+                    <div th:if="${#httpServletRequest.getParameter('message')}" class="row justify-content-center">
+                        <p class="message error-message" th:text="${#httpServletRequest.getParameter('message')}"></p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <form th:action="@{/registration}" method="post" th:object="${object}" class="form">
+                            <div class="row my-3">
+                                <label for="login" class="col-4 col-form-label label-style">Login</label>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="login" name="login" required>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <label for="email" class="col-4 col-form-label label-style">Email address</label>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <label for="password" class="col-4 col-form-label label-style">Password</label>
+                                <div class="col-8">
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <label for="repeatPassword" class="col-4 col-form-label label-style">Repeat password</label>
+                                <div class="col-8">
+                                    <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <p class="message">All field is required</p>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-3 justify-content-center">
+                                    <button type="submit" class="btn btn-submit btn-style">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

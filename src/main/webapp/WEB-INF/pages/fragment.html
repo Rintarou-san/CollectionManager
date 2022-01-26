@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="'WOW! Collection - '+${collection.name}"></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="row navigation" th:fragment="header">
+        <div class="col-2"><a th:href="@{/}">Main</a></div>
+        <div class="col-2"><a th:href="@{/items/all}">All items</a></div>
+        <div class="col-2"><a th:href="@{/collections/all}">All collections</a></div>
+        <div class="col-2"><a href="">menu</a></div>
+    </div>
+</body>
+
+</html>

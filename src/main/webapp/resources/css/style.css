@@ -1,0 +1,226 @@
+:root {
+    --main-background: #f0f0f0;
+    --color-background: #0c9978;
+    --light-font-color: #fff;
+    --dark-font-color: #444;
+}
+
+body {
+    background: var(--main-background);
+    color: var(--dark-font-color);
+}
+
+.header {
+    background: url(../img/FirstScreen.jpg) center/cover no-repeat;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 30px 0;
+    position: relative;
+    z-index: 0;
+}
+
+.header::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.search-field {
+    width: 70%;
+    background: var(--main-background);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.search-icon {
+    background: var(--main-background);
+    width: 40px;
+    height: auto;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+.header nav {
+    margin-top: 80px;
+}
+
+.navigation {
+    margin-top: 30px;
+}
+
+.navigation-item {
+    width: auto;
+    color: var(--light-font-color);
+    text-decoration: none;
+    font: 20px var(--bs-font-sans-serif);
+    border: 2px solid var(--light-font-color);
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin: 0 20px;
+    transition: all .1s linear;
+}
+
+.navigation-item:hover {
+    color: var(--light-font-color);
+    border: 2px solid var(--color-background);
+}
+
+.ref-create-account {
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    transition: all .1s linear;
+}
+
+.ref-create-account:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+.tags {
+    list-style-type: none;
+}
+
+.tags li {
+    padding: 3px 20px;
+    margin-bottom: 10px;
+    border: 2px solid var(--light-font-color);
+    border-radius: 5px;
+    transition: all .1s linear;
+}
+
+.tags li a {
+    font: 15px var(--bs-font-sans-serif);
+    text-decoration: none;
+    color: var(--light-font-color);
+}
+
+.tags li:hover {
+    color: var(--light-font-color);
+    border: 2px solid var(--color-background);
+    transform: translateX(-20px);
+}
+
+.sign-in:hover {
+    color: var(--light-font-color);
+    border: none;
+    background: var(--color-background);
+}
+
+.sign-in {
+    background: var(--main-background);
+    color: var(--dark-font-color);
+    border: none;
+    text-align: right;
+}
+
+.copyright {
+    font: 20px var(--bs-font-sans-serif);
+    color: var(--light-font-color);
+    text-align: center;
+}
+
+.create-account {
+    margin-left: 20px;
+    font: 16px var(--bs-font-sans-serif);
+    color: var(--dark-font-color);
+    text-decoration: none;
+    transition: all .1s linear;
+}
+
+.create-account:hover {
+    color: var(--color-background);
+}
+
+.main-title {
+    text-align: right;
+    color: var(--dark-font-color);
+    font: bold 40px var(--bs-font-sans-serif);
+    text-shadow: 3px 5px 0 rgba(0, 0, 0, .15);
+}
+
+.btn-submit {
+    border: 2px solid var(--dark-font-color);
+    border-radius: 5px;
+    padding: 5px 20px;
+    transition: all .1s linear;
+}
+
+.btn-submit:focus {
+    box-shadow: none;
+}
+
+.btn-submit:hover {
+    background: var(--color-background);
+    color: var(--light-font-color);
+    border: 2px solid var(--color-background);
+}
+
+input {
+    margin-bottom: 20px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgb(12, 153, 120, 0.4)
+}
+
+#header .card {
+    width: 300px;
+    height: 450px;
+    background: var(--main-background);
+    transition: all .1s linear;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 10px;
+    box-shadow: -10px 5px 10px rgba(0, 0, 0, .4);
+    padding: 20px;
+    margin-top: 30px;
+}
+
+#header .card-2 {
+    margin-top: 40px;
+    margin-left: -30px;
+}
+
+#header .card-3 {
+    margin-top: 50px;
+    margin-left: -30px;
+}
+
+#header .card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+    transform: scale(1.05) translateY(-10px);
+    z-index: 2;
+}
+
+.collection-title {
+    font-size: 25px;
+    color: var(--color-background);
+    margin-top: 20px;
+}
+
+.footer {
+    background: var(--color-background);
+    padding: 10px 0;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    margin-top: 30px;
+    padding: 0;
+    transform: rotateZ(45deg);
+    border-right: 2px solid var(--light-font-color);
+    border-bottom: 2px solid var(--light-font-color);
+}
+
+.side-bar {
+    position: fixed;
+    top: 130px;
+    right: 20px;
+}

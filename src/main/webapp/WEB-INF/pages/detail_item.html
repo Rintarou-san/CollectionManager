@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="'WOW! Collection - '+${item.name}"></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/resources/css/style_detail.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container" th:insert="fragment::header"></div>
+    </header>
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-8">
+                <div class="details-content d-flex">
+                    <div class="photo"></div>
+                    <div class="details">
+                        <h2 class="title details-title" th:text="${item.name}"></h2>
+                        <ul class="tags">
+                            <th:block th:each="tag:${item.tags}">
+                                <li><a th:href="@{'/tags/'+${tag.name}+'?id='+${tag.id}}" th:text="${tag.name}"></a></li>
+                            </th:block>
+                        </ul>
+                    </div>
+                    <div class="buttons">
+                        <div class="col-4"><a th:href="@{/like}" class="btn btn-submit btn-like">Like</a></div>
+                        <th:block th:if="${item.collection.user.login}==${#authentication.getPrincipal().getUsername()}">
+                            <div class="col-4"><a th:href="@{/collection/item/edit}" class="btn btn-submit btn-style">Edit</a></div>
+                            <div class="col-4"><a th:href="@{'/collection/item/delete?id='+${item.id}}" class="btn btn-submit btn-style">Delete</a></div>
+                        </th:block>
+                    </div>
+                </div>
+                <div class="fields-block">
+                    <h3 class="title description-title">Specification</h3>
+                    <table class="fields-table">
+                       <th:block th:each="field:${item.collection.fields}" th:object="${item}" th:if="*{item['__${field.classField}__']}">
+                           <tr>
+                            <td class="field-header" th:text="${field.title}"></td>
+                            <td class="field-text">
+                                <th:block th:if="${field.type}=='array'">
+                                    <ul class="field-attributes">
+                                        <th:block th:each="attr:${item['__${field.classField}__']}">
+                                            <li th:text="${attr.name}"></li>
+                                        </th:block>
+                                    </ul>
+                                </th:block>
+                                <th:block th:unless="${field.type}=='array'" th:text="${item['__${field.classField}__']}"></th:block>
+                            </td>
+                        </tr>
+                       </th:block>
+                    </table>
+                </div>
+                <div class="description-block">
+                    <h3 class="title description-title">Description</h3>
+                    <p class="description-text" th:text="${item.description}"></p>
+                </div>
+                <div class="items-block">
+                    <h3 class="title description-title">Items's collections</h3>
+                    <ul class="items">
+                        <li>
+                        <a th:href="@{'/collection/'+${item.collection.name}+'?id='+${item.collection.id}}" th:text="${item.collection.name}">item</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="comments-block">
+                    <h3 class="title description-title">Item's comments</h3>
+                    <form th:action="@{/collection/item/add-comment}" method="post" class="form-send-comments">
+                        <textarea class="form-control form-textarea" placeholder="Write comment here..."></textarea>
+                        <button class="btn btn-submit btn-style">Send</button>
+                    </form>
+                    <ul class="comments">
+                       <th:block th:each="comment:${item.comments}">
+                           <li>
+                            <div class="row">
+                                <div class="col-9 comment-user" th:text="${comment.user.login}"></div>
+                                <div class="col-3 comment-date" th:text="'Date:'+${comment.date}"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 comment-text" th:text="${comment.text}"></div>
+                            </div>
+                        </li>
+                       </th:block>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-4">
+                <h2 class="title">All items</h2>
+                <ul class="menu-collections">
+                   <th:block th:each="menu:${items}">
+                       <li><a th:href="@{'/items/'+${menu.name}+'?id='+${menu.id}}" th:text="${menu.name}"></a></li>
+                   </th:block>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

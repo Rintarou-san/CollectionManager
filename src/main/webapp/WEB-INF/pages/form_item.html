@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="'WOW! Collection - '+${collection.name}"></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/resources/css/style_detail.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container" th:insert="fragment::header"></div>
+    </header>
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-8">
+                <h2 class="title center-title">Add item</h2>
+                <form th:action="@{'/collection/'+${collection.name}+'/'+${collection.id}+'/add'}" method="post" th:object="${object}" class="form">
+                    <th:block th:each="field:${collection.fields}">
+                        <label for="" th:text="${field.title}"></label>
+                    </th:block>
+                </form>
+            </div>
+            <div class="col-4">
+                <h2 class="title">All collections</h2>
+                <ul class="menu-collections">
+                   <th:block th:each="menu:${collections}">
+                       <li><a th:href="@{'/collection/'+${menu.name}+'?id='+${menu.id}}" th:text="${menu.name}"></a></li>
+                   </th:block>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-3.6.0.min.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>WOW! Collection - Add Collection</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/resources/css/style_form.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-section">
+            <div class="row justify-content-center">
+                <h1 class="form-title" th:text="${title}"></h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="form-content d-flex justify-content-center">
+                    <form th:action="@{(${url})}" method="post" th:object="${object}" class="form">
+                       <!--input type="hidden" th:value="${#authentication.getPrincipal().getUsername()}" name="user"-->
+                        <div class="row my-3">
+                            <label for="name" class="col-5 col-form-label label-style">Collection's title</label>
+                            <div class="col-7">
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <label for="image" class="col-5 col-form-label label-style">Collection's image</label>
+                            <div class="col-7">
+                                <input type="file" class="form-control" id="image" name="image">
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <label for="description" class="col-5 col-form-label label-style">Collection's description</label>
+                            <div class="col-7">
+                                <textarea type="text" class="form-control form-textarea" id="description" name="description"></textarea>
+                            </div>
+                        </div>
+                        <fieldset class="fields-area">
+                            <legend class="legend-title">Collection's tags</legend>
+                            <div class="row my-3">
+                                <th:block th:each="tag:${tags}">
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" th:id="${tag.name}" th:value="${tag.id}" th:name="tags">
+                                            <label class="form-check-label" th:for="${tag.name}" th:text="${tag.name}"></label>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </fieldset>
+                        <fieldset class="fields-area">
+                            <legend class="legend-title">Collection's attributes</legend>
+                            <div class="row my-3">
+                                <th:block th:each="field:${fields}" th:if="${field.title}">
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" th:id="${field.classField}" th:value="${field.id}" th:name="fields">
+                                            <label class="form-check-label" th:for="${field.classField}" th:text="${field.title}"></label>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </fieldset>
+                        <button type="submit" class="btn btn-submit btn-style">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
