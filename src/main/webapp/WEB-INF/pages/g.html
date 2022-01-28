@@ -11,38 +11,79 @@
 
 <body>
     <header class="header">
-        <div class="container">
-            <div class="row navigation">
-                <div class="col-2"><a href="">menu</a></div>
-                <div class="col-2"><a href="">menu</a></div>
-                <div class="col-2"><a href="">menu</a></div>
-                <div class="col-2"><a href="">menu</a></div>
+        <div class="container" th:insert="fragment::header">
+            <div class="row navigation align-items-center" th:fragment="header">
+                <div class="col-9 d-flex">
+                    <a href="@{/}">Main</a>
+                    <a href="@{/items/all}">All items</a>
+                    <a href="@{/collections/all}">All collections</a>
+                    <a href="">menu</a>
+                </div>
+                <div class="col-3">
+                    <form action="">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <button class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg></button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </header>
     <div class="container">
         <div class="row py-4">
-            <div class="col-8">
-                <h2 class="title center-title">Add item</h2>
-                <form th:action="@{'/collection/'+${collection.name}+'/add'}" method="post" th:object="${object}" class="form">
-                    <th:block th:each="field:${collection.fields}">
-                        <label for="" th:text="${field.title}"></label>
-                    </th:block>
-                </form>
+            <div class="col-9">
+                <div class="row justify-content-center my-5">
+                    <div class="card">
+                        <div class="card-photo"></div>
+                        <div class="card-details">
+                            <h2 class="title details-title">Collection title</h2>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-photo"></div>
+                        <div class="card-details">
+                            <h2 class="title details-title">Collection title</h2>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-photo"></div>
+                        <div class="card-details">
+                            <h2 class="title details-title">Collection title</h2>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
-            <div class="col-4">
-                <h2 class="title">All items</h2>
-                <ul class="menu-collections">
-                    <li><a href="">ref</a></li>
-                    <li><a href="">ref</a></li>
-                    <li><a href="">ref</a></li>
-                    <li><a href="">ref</a></li>
-                </ul>
+            <div class="col-3">
+                <div class="login-block mb-5">
+                    <div class="row justify-content-center">
+                        <div class="photo-profile mb-5"></div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <a href="@{/user/profile}" class="btn btn-submit btn-style">My profile</a>
+                    </div>
+                </div>
+                <h2 class="title">Tag cloud</h2>
+                <div class="tag-cloud d-flex justify-content-end flex-wrap">
+                    <a href="">Tag</a>
+                    <a href="">One more tag</a>
+                    <a href="">And more</a>
+                    <a href="">One more tag</a>
+                    <a href="">Tag</a>
+                    <a href="">Tag</a>
+                    <a href="">And more</a>
+                    <a href="">One more tag</a>
+                    <a href="">Tag</a>
+                </div>
             </div>
         </div>
     </div>
     <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/resources/js/jquery-3.6.0.min.js}"></script>
+    <script src="../../resources/js/jquery-3.6.0.min.js"></script>
+    <script src="../../resources/js/home.js"></script>
 </body>
 
 </html>

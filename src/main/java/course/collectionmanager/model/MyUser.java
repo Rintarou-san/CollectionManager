@@ -56,6 +56,9 @@ public class MyUser {
     @Column(name = "language")
     private String language;
     
+    @Column(name = "description")
+    private String description;
+    
     @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private List<Comment> comments;

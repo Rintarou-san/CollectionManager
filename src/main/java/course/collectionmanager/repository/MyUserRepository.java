@@ -22,6 +22,10 @@ public interface MyUserRepository extends JpaRepository<MyUser, Long> {
     @Modifying
     @Query("update MyUser u set u.role=?1 where u.id=?2")
     void setRoleById(String role, Long id);
+    
+    @Modifying
+    @Query("update MyUser u set u.description=?1 where u.id=?2")
+    void setDescriptionById(String description, Long id);
 
     @Transactional
     @Modifying

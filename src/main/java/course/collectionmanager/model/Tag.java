@@ -1,8 +1,7 @@
 package course.collectionmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,27 +20,18 @@ public class Tag {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy="tags")
+    @ManyToMany(mappedBy = "tags")
     @JsonBackReference
-    private Set<Item> items=new HashSet();
+    private List<Item> items;
 
-    @ManyToMany(mappedBy="tags")
+    @ManyToMany(mappedBy = "tags")
     @JsonBackReference
-    private Set<Collection> collections=new HashSet();
+    private List<Collection> collections;
 
-    @Override
-    public String toString() {
-        return "{" + "id=" + id + 
-                ", name=" + name + 
-                ", items=" + items + 
-                ", collections=" + collections + '}';
-    }
-    
-    
 }

@@ -67,9 +67,7 @@ body::before {
     height: 200px;
     resize: none;
 }
-.label-style {
-    text-align: right;
-}
+
 
 .btn-style {
     padding: 5px 20px;

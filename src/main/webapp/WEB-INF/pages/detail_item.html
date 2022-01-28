@@ -59,7 +59,7 @@
                     <p class="description-text" th:text="${item.description}"></p>
                 </div>
                 <div class="items-block">
-                    <h3 class="title description-title">Items's collections</h3>
+                    <h3 class="title description-title">Item's collection</h3>
                     <ul class="items">
                         <li>
                         <a th:href="@{'/collection/'+${item.collection.name}+'?id='+${item.collection.id}}" th:text="${item.collection.name}">item</a>
@@ -97,6 +97,8 @@
             </div>
         </div>
     </div>
+    <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-3.6.0.min.js}"></script>
 </body>
 
 </html>

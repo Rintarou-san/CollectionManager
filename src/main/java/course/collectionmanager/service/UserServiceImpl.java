@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import course.collectionmanager.repository.MyUserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -75,5 +77,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public MyUser findByLogin(String login) {
         return repository.findByLogin(login);
+    }
+
+    @Override
+    @Transactional
+    public void setDescription(String description) {
+        UserDetails userInfo = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MyUser user = repository.findByLogin(userInfo.getUsername());
+        repository.setDescriptionById(description, user.getId());
     }
 }

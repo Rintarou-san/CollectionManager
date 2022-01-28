@@ -1,7 +1,7 @@
 package course.collectionmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,20 +21,14 @@ public class Cover {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "name")
-    private String type;
+    private String name;
 
     @OneToMany(mappedBy = "coverType", fetch = FetchType.EAGER)
     @JsonBackReference
-    private Collection<Item> items;
+    private List<Item> items;
 
-    @Override
-    public String toString() {
-        return type;
-    }
-    
-    
 }

@@ -22,33 +22,26 @@ public class Field {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "title")
     private String title;
-    
+
     @Column(name = "class_field")
     private String classField;
-    
+
     @Column(name = "type")
     private String type;
-   
+
     @ManyToMany
     @JsonBackReference
-    @JoinTable(name="collection_field", 
-            joinColumns=@JoinColumn(name="fieldID"),
-            inverseJoinColumns=@JoinColumn(name="collectionID"))
+    @JoinTable(name = "collection_field",
+            joinColumns = @JoinColumn(name = "fieldID"),
+            inverseJoinColumns = @JoinColumn(name = "collectionID"))
     private List<Collection> collections;
-
-    @Override
-    public String toString() {
-        return "{" + "id=" + id + ", name=" + name + ", title=" + title + ", classField=" + classField + ", collections=" + collections + '}';
-    }
-    
-    
 
 }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>WOW! Collection</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/resources/css/style_detail.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container" th:insert="fragment::header"></div>
+    </header>
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-9">
+                <div class="row justify-content-center my-4">
+                    <div class="card">
+                        <div class="card-photo"></div>
+                        <div class="card-details">
+                            <h2 class="title details-title">Collection title</h2>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-photo"></div>
+                        <div class="card-details">
+                            <h2 class="title details-title">Collection title</h2>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-photo"></div>
+                        <div class="card-details">
+                            <h2 class="title details-title">Collection title</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="set-of-cards">
+                    
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="login-block mb-5">
+                    <div sec:authorize="!isAuthenticated()">
+                        <h2 class="title login-title">Login</h2>
+                        <form th:action="@{/login}" method="post" th:object="${object}" class="form">
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-12">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-submit btn-style">Sign in</button>
+                                    <a href="@{/registration}" class="btn btn-submit btn-style">Registration</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <div class="row justify-content-center">
+                            <div class="photo-profile mb-5"></div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <a th:href="@{/user/profile}" class="btn btn-submit btn-style">My profile</a>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="title">Tag cloud</h2>
+                <div class="tag-cloud d-flex justify-content-end flex-wrap">
+                    <th:block th:each="tag:${tags}">
+                        <a th:href="@{'/items?tag='+${tag.id}}" th:text="${tag.name}"></a>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <template id="template-all-items">
+        <div class="col-12">
+            <div class="d-flex">
+                <div class="photo"></div>
+                <div class="details">
+                    <h3 class="title details-title"><a href="" id="item-title"></a></h3>
+                    <ul class="cards-tags" id="item-tags"></ul>
+                </div>
+            </div>
+            <div class="description-block">
+                <h3 class="title description-title">Description</h3>
+                <p class="description-text" id="item-description"></p>
+            </div>
+        </div>
+    </template>
+    
+    <template id="template-header">
+        <h1 class="title common-title"></h1>
+    </template>
+
+    <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/resources/js/home.js}"></script>
+</body>
+
+</html>

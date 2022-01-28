@@ -17,6 +17,8 @@ public interface UserService {
     
     public void setRole(MyUser user);
     
+    public void setDescription(String description);
+    
     public void setLastLogin(MyUser user);
 
     public boolean delete(long id);

@@ -2,9 +2,7 @@ package course.collectionmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -90,27 +88,22 @@ public class Item {
     @JoinTable(name = "item_genre",
             joinColumns = @JoinColumn(name = "itemID"),
             inverseJoinColumns = @JoinColumn(name = "genreID"))
-    private Set<Genre> genres = new HashSet();
+    private List<Genre> genres;
 
     @ManyToMany
     @JsonManagedReference
     @JoinTable(name = "item_tag",
             joinColumns = @JoinColumn(name = "itemID"),
             inverseJoinColumns = @JoinColumn(name = "tagID"))
-    private Set<Tag> tags = new HashSet();
+    private List<Tag> tags;
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="collection_id")
+    @JoinColumn(name = "collection_id")
     private Collection collection;
-    
+
     @OneToMany(mappedBy = "item")
     @JsonManagedReference
     private List<Comment> comments;
-
-    @Override
-    public String toString() {
-        return "Item{" + "id=" + id + ", name=" + name + ", description=" + description + ", year=" + year + ", yearOfPublishing=" + yearOfPublishing + ", price=" + price + ", country=" + country + ", author=" + author + ", fandom=" + fandom + ", alcoholPercentage=" + alcoholPercentage + ", numberOfSheets=" + numberOfSheets + ", sizeWidth=" + sizeWidth + ", sizeHeight=" + sizeHeight + ", page_line=" + pageLine + ", dating=" + dating + ", paperDensity=" + paperDensity + '}';
-    }
 
 }

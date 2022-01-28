@@ -49,22 +49,26 @@ function fieldsToString(array) {
 $('#all-items').click(function (event) {
     event.preventDefault();
     $.get('/items/all', {}, function (data) {
+        $('#set-of-cards').empty();
         let template = $('#template-all-items');
-        let parent = $('#parent');
-        parent.addClass('py-4');
+        let header = $('#template-header');
+        let parent = $('#set-of-cards');
+        let headerClone = header[0].content.cloneNode(true);
+        headerClone.querySelector('h1').innerHTML = "Collection's items";
+        parent.append(headerClone);
         data.forEach((item) => {
             let clone = template[0].content.cloneNode(true);
-            clone.querySelector('#title').innerHTML = item.name;
-            clone.querySelector('#title').setAttribute('href', `/items/${item.name}?id=${item.id}`);
+            clone.querySelector('#item-title').innerHTML = item.name;
+            clone.querySelector('#item-title').setAttribute('href', `/items/${item.name}?id=${item.id}`);
             item.tags.forEach((tag) => {
                 let li = document.createElement('li');
                 let a = document.createElement('a');
                 a.innerHTML = tag.name;
                 a.setAttribute('href', `/tags/${tag.name}?id=${tag.id}`);
                 li.append(a);
-                clone.querySelector('#tags').append(li);
+                clone.querySelector('#item-tags').append(li);
             })
-            clone.querySelector('#description').innerHTML = item.description;
+            clone.querySelector('#item-description').innerHTML = item.description;
             parent.append(clone);
         })
     })
@@ -73,23 +77,48 @@ $('#all-items').click(function (event) {
 $('#all-collections').click(function (event) {
     event.preventDefault();
     $.get('/collections/all', {}, function (data) {
+        $('#set-of-cards').empty();
         let template = $('#template-all-items');
-        let parent = $('#parent');
-        parent.addClass('py-4');
+        let header = $('#template-header');
+        let parent = $('#set-of-cards');
+        let headerClone = header[0].content.cloneNode(true);
+        headerClone.querySelector('h1').innerHTML = "User's collections";
+        parent.append(headerClone);
         data.forEach((item) => {
             let clone = template[0].content.cloneNode(true);
-            clone.querySelector('#title').innerHTML = item.name;
-            clone.querySelector('#title').setAttribute('href', `/collection/${item.name}?id=${item.id}`);
+            clone.querySelector('#item-title').innerHTML = item.name;
+            clone.querySelector('#item-title').setAttribute('href', `/collection/${item.name}?id=${item.id}`);
             item.tags.forEach((tag) => {
                 let li = document.createElement('li');
                 let a = document.createElement('a');
                 a.innerHTML = tag.name;
                 a.setAttribute('href', `/tags/${tag.name}?id=${tag.id}`);
                 li.append(a);
-                clone.querySelector('#tags').append(li);
+                clone.querySelector('#item-tags').append(li);
             })
-            clone.querySelector('#description').innerHTML = item.description;
+            clone.querySelector('#item-description').innerHTML = item.description;
             parent.append(clone);
         })
     })
 })
+
+$('#edit-user-description').click(function (event) {
+    event.preventDefault();
+    $('#save-user-description').removeAttr('hidden');
+    $('#user-description').removeAttr('readOnly');
+})
+
+
+$('#save-user-description').click(function (event) {
+    $.post('/user/edit', {
+        text: description.text.value
+    });
+    $('#save-user-description').attr('hidden', true);
+})
+
+$('#password, #confirm_password').on('keyup', function () {
+    if ($('#password').val() == $('#confirm_password').val()) {
+        $('#message').html('Matching').css('color', 'green');
+    } else
+        $('#message').html('Not Matching').css('color', 'red');
+});

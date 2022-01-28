@@ -1,5 +1,6 @@
 package course.collectionmanager.controller;
 
+import course.collectionmanager.model.MyUser;
 import course.collectionmanager.service.ItemService;
 import course.collectionmanager.service.TagService;
 import course.collectionmanager.service.UserService;
@@ -23,8 +24,8 @@ public class MainController {
     @GetMapping(value = "/")
     public String home(Model model) {
         model.addAttribute("tags", serviceTag.allTags());
-        model.addAttribute("items", serviceItem.allItems());
-        return "home";
+        model.addAttribute("object", new MyUser());
+        return "index";
     }
 
     @GetMapping(value = "/admin")

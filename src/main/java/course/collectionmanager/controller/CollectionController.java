@@ -2,9 +2,13 @@ package course.collectionmanager.controller;
 
 import course.collectionmanager.model.Collection;
 import course.collectionmanager.model.Comment;
+import course.collectionmanager.model.Item;
+import course.collectionmanager.service.AlcoholService;
 import course.collectionmanager.service.CollectionService;
 import course.collectionmanager.service.CommentService;
+import course.collectionmanager.service.CoverService;
 import course.collectionmanager.service.FieldService;
+import course.collectionmanager.service.GenreService;
 import course.collectionmanager.service.TagService;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +36,15 @@ public class CollectionController {
     @Autowired
     private CommentService serviceComment;
 
+    @Autowired
+    private AlcoholService serviceAlcohol;
+
+    @Autowired
+    private CoverService serviceCover;
+
+    @Autowired
+    private GenreService serviceGenre;
+
     @GetMapping(value = "/{title}")
     public String detail(@RequestParam(name = "id") long id, Model model) {
         model.addAttribute("collection", serviceCollection.getById(id));
@@ -55,9 +68,9 @@ public class CollectionController {
         serviceCollection.add(collection);
         return "redirect:/";
     }
-    
-    @GetMapping(value="/delete")
-    public String delete(@RequestParam(name="id") long id){
+
+    @GetMapping(value = "/delete")
+    public String delete(@RequestParam(name = "id") long id) {
         serviceCollection.delete(id);
         return "redirect:/";
     }
@@ -67,16 +80,16 @@ public class CollectionController {
         serviceComment.add(comment);
         return "redirect:" + request.getHeader("referer");
     }
-    
-    @GetMapping(value="/{title}/{id}/add")
-    public String addPage(@PathVariable(name="id") long id, Model model, HttpServletRequest request) {
+
+    @GetMapping(value = "/{title}/{id}/add")
+    public String addPage(@PathVariable(name = "id") long id, Model model, HttpServletRequest request) {
+        model.addAttribute("object", new Item());
         model.addAttribute("collection", serviceCollection.getById(id));
+        model.addAttribute("tags", serviceTag.allTags());
+        model.addAttribute("alcohol", serviceAlcohol.allAlcohols());
+        model.addAttribute("materials", serviceCover.allCovers());
+        model.addAttribute("exGenre", serviceGenre.allGenres());
         return "form_item";
-    }
-    
-    @PostMapping(value="/{title}/add")
-    public String addItem(HttpServletRequest request) {
-        return "redirect:" + request.getHeader("referer");
     }
 
 }

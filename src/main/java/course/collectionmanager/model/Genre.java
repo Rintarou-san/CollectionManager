@@ -1,8 +1,7 @@
 package course.collectionmanager.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;;
-import java.util.HashSet;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,12 +28,6 @@ public class Genre {
 
     @ManyToMany(mappedBy = "genres")
     @JsonBackReference
-    private Set<Item> items=new HashSet();
+    private List<Item> items;
 
-    @Override
-    public String toString() {
-        return name + ", ";
-    }
-    
-    
 }

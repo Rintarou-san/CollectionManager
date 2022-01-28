@@ -25,16 +25,10 @@ public class Alcohol {
     private long id;
 
     @Column(name = "name")
-    private String type;
+    private String name;
 
     @OneToMany(mappedBy = "alcoholType", fetch = FetchType.EAGER)
     @JsonBackReference
     private Collection<Item> items;
 
-    @Override
-    public String toString() {
-        return type;
-    }
-    
-    
 }
