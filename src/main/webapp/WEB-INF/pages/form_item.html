@@ -150,6 +150,10 @@
                                     <input class="form-check-input" type="checkbox" id="dating" name="dating">
                                     <label class="form-check-label" for="dating">Dating</label>
                                 </div>
+                                <div th:if="${collection.fields.^[classField == 'inlay']}" class="col-4 form-check">
+                                    <input class="form-check-input" type="checkbox" id="inlay" name="inlay">
+                                    <label class="form-check-label" for="inlay">Inlay</label>
+                                </div>
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'coverType']}" class="row my-3">
@@ -162,13 +166,39 @@
                                 </select>
                             </div>
                         </div>
+                        <div th:if="${collection.fields.^[classField == 'jewelryType']}" class="row my-3">
+                            <label for="jewelryType" class="col-4 col-form-label label-style">Jewelry type</label>
+                            <div class="col-8">
+                                <select name="jewelryType" id="jewelryType" class="form-select">
+                                    <th:block th:each="jewelry:${jewelries}">
+                                        <option th:value="${jewelry.id}" th:text="${jewelry.name}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                        </div>
+                        <div th:if="${collection.fields.^[classField == 'metal']}" class="row my-3">
+                            <label for="metal" class="col-4 col-form-label label-style">Preciuos metal</label>
+                            <div class="col-8">
+                                <select name="jewelryType" id="jewelryType" class="form-select">
+                                    <th:block th:each="metal:${metals}">
+                                        <option th:value="${metal.id}" th:text="${metal.name}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                        </div>
                         <div th:if="${collection.fields.^[classField == 'paperDensity']}" class="row my-3">
-                            <label for="paperDensity" class="col-4 col-form-label label-style">Paper density</label>
+                            <label for="fineness" class="col-4 col-form-label label-style">Fineness</label>
                             <div class="col-8">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" id="paperDensity" name="paperDensity">
+                                    <input type="number" class="form-control" id="fineness" name="fineness">
                                     <span class="input-group-text">g/m²</span>
                                 </div>
+                            </div>
+                        </div>
+                        <div th:if="${collection.fields.^[classField == 'fineness']}" class="row my-3">
+                            <label for="fineness" class="col-4 col-form-label label-style">Fineness</label>
+                            <div class="col-8">
+                                <input type="number" class="form-control" id="fineness" name="fineness">
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'genres']}" class="row my-3 align-items-center">

@@ -10,7 +10,9 @@ import course.collectionmanager.service.CommentService;
 import course.collectionmanager.service.CoverService;
 import course.collectionmanager.service.FieldService;
 import course.collectionmanager.service.GenreService;
+import course.collectionmanager.service.JewelryService;
 import course.collectionmanager.service.LikeService;
+import course.collectionmanager.service.MetalService;
 import course.collectionmanager.service.TagService;
 import course.collectionmanager.service.UserService;
 import java.security.Principal;
@@ -54,6 +56,12 @@ public class CollectionController {
 
     @Autowired
     private UserService serviceUser;
+
+    @Autowired
+    private MetalService serviceMetal;
+
+    @Autowired
+    private JewelryService serviceJewelry;
 
     @GetMapping(value = "/{title}")
     public String detail(@RequestParam(name = "id") long id, Model model, Principal principal) {
@@ -112,6 +120,8 @@ public class CollectionController {
         model.addAttribute("alcohol", serviceAlcohol.allAlcohols());
         model.addAttribute("materials", serviceCover.allCovers());
         model.addAttribute("exGenre", serviceGenre.allGenres());
+        model.addAttribute("metals", serviceMetal.allMetals());
+        model.addAttribute("jewelries", serviceJewelry.allJewelries());
         return "form_item";
     }
 

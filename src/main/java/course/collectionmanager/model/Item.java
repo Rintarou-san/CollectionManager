@@ -90,6 +90,22 @@ public class Item {
             inverseJoinColumns = @JoinColumn(name = "genreID"))
     private List<Genre> genres;
 
+    @Column(name = "inlay")
+    private Boolean inlay;
+
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "metal")
+    private Metal metal;
+
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "jewelry_type")
+    private Jewelry jewelryType;
+
+    @Column(name = "fineness")
+    private Integer fineness;
+
     @ManyToMany
     @JsonManagedReference
     @JoinTable(name = "item_tag",
@@ -105,7 +121,7 @@ public class Item {
     @OneToMany(mappedBy = "item")
     @JsonManagedReference
     private List<Comment> comments;
-    
+
     @OneToMany(mappedBy = "item")
     @JsonManagedReference
     private List<UserLike> likes;
