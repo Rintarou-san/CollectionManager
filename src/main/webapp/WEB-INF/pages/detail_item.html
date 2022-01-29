@@ -6,12 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:if="${design}=='dark'" th:href="@{/resources/css/root_dark.css}" rel="stylesheet" type="text/css" />
+    <link th:if="${design}=='light'" th:href="@{/resources/css/root_light.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/resources/css/style_detail.css}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <header class="header">
-        <div class="container" th:insert="fragment::header"></div>
+        <div class="container" th:insert="fragment::min-header"></div>
     </header>
     <div class="container">
         <div class="row py-4">
@@ -27,7 +29,11 @@
                         </ul>
                     </div>
                     <div class="buttons">
-                        <div class="col-4"><a th:href="@{/like}" class="btn btn-submit btn-like">Like</a></div>
+                        <form th:action="@{/collection/like}" th:object="${newLike}" method="post">
+                            <input type="hidden" th:value="${item.id}" name="item">
+                            <button th:if="${item.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like-fill">Like</button>
+                            <button th:unless="${item.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like">Like</button>
+                        </form>
                         <th:block th:if="${item.collection.user.login}==${#authentication.getPrincipal().getUsername()}">
                             <div class="col-4"><a th:href="@{/collection/item/edit}" class="btn btn-submit btn-style">Edit</a></div>
                             <div class="col-4"><a th:href="@{'/collection/item/delete?id='+${item.id}}" class="btn btn-submit btn-style">Delete</a></div>
@@ -68,8 +74,9 @@
                 </div>
                 <div class="comments-block">
                     <h3 class="title description-title">Item's comments</h3>
-                    <form th:action="@{/collection/item/add-comment}" method="post" class="form-send-comments">
-                        <textarea class="form-control form-textarea" placeholder="Write comment here..."></textarea>
+                    <form th:action="@{/collection/add-comment}" th:object="${newComment}" method="post" class="form-send-comments">
+                       <input type="hidden" th:value="${item.id}" name="item">
+                        <textarea class="form-control form-textarea" placeholder="Write comment here..." name="text"></textarea>
                         <button class="btn btn-submit btn-style">Send</button>
                     </form>
                     <ul class="comments">

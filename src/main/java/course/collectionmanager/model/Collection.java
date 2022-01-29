@@ -56,6 +56,10 @@ public class Collection {
 
     @OneToMany(mappedBy = "collection")
     @JsonManagedReference
+    private List<UserLike> likes;
+    
+    @OneToMany(mappedBy = "collection")
+    @JsonManagedReference
     private List<Comment> comments;
 
     @ManyToOne

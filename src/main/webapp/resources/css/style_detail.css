@@ -1,14 +1,3 @@
-:root {
-    --light-gray: #f0f0f0;
-    --light-ocean-green: #0c997823;
-    --middle-gray: #bababa;
-    --ocean-green: #0c9978;
-    --white: #fff;
-    --dark-ocean-green: #0c755d;
-    --light-font-color: #fff;
-    --dark-gray: #444;
-}
-
 body {
     background: var(--light-gray);
     color: var(--dark-gray);
@@ -19,6 +8,9 @@ body {
     text-align: right;
     color: var(--dark-gray);
     font: 30px var(--bs-font-sans-serif);
+}
+span svg {
+    margin-right: 15px;
 }
 
 /*MAIN PAGE*/
@@ -90,6 +82,7 @@ body {
 .login-title {
     text-align: center;
 }
+
 .photo-profile {
     width: 100px;
     height: 100px;
@@ -108,33 +101,64 @@ body {
     font: bold 40px var(--bs-font-sans-serif);
     text-shadow: 3px 5px 0 rgba(0, 0, 0, .15);
 }
+
 #set-of-cards .col-12 {
     padding: 20px;
 }
+
 #set-of-cards .col-12:nth-child(even) {
     background: var(--light-ocean-green);
 }
+
 .cards-tags {
     display: flex;
     list-style: none;
     padding: 0;
 }
-.cards-tags li{
+
+.cards-tags li {
     padding: 5px 15px;
-    margin: 5px 10px 5px 0; 
+    margin: 5px 10px 5px 0;
     border-radius: 50px;
     border: 1px solid var(--dark-gray);
     background: var(--middle-gray);
     transition: all .1s linear;
 }
-.cards-tags li a{
+
+.cards-tags li a {
     color: var(--dark-gray);
     text-decoration: none;
 }
-.cards-tags li:hover{
+
+.cards-tags li:hover {
     transform: scale(1.1);
 }
+
 /*End ALL COLLECTIONS/ITEMS*/
+
+/*FORM REGISTRATION*/
+.message {
+    font-size: 12px;
+}
+
+.login-message {
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.error-message {
+    color: var(--dark-red);
+    background: var(--light-red);
+}
+
+.success-message {
+    color: var(--dark-green);
+    background: var(--light-green);
+}
+
+/*End FORM REGISTRATION*/
 
 /*HEADER*/
 .header {
@@ -211,6 +235,7 @@ body {
     color: var(--dark-gray);
     transition: all .1s linear;
 }
+
 .details-title a:hover {
     text-decoration: underline;
     color: var(--ocean-green);
@@ -346,15 +371,29 @@ body {
 
 .btn-style:hover {
     background: transparent;
+    color: var(--dark-gray);
 }
 
 .btn-like {
     min-width: 100px;
     margin-bottom: 10px;
+    color: var(--dark-gray);
 }
 
 .btn-like::before {
     content: url(../img/heart.svg);
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.btn-like-fill {
+    min-width: 100px;
+    margin-bottom: 10px;
+    color: var(--dark-gray);
+}
+
+.btn-like-fill::before {
+    content: url(../img/heart-fill.svg);
     margin-right: 10px;
     vertical-align: middle;
 }

@@ -1,7 +1,9 @@
 package course.collectionmanager.controller;
 
 import course.collectionmanager.model.MyUser;
+import course.collectionmanager.service.TagService;
 import course.collectionmanager.service.UserService;
+import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,21 +19,20 @@ public class UserController {
 
     @Autowired
     private UserService service;
+    @Autowired
+    private TagService serviceTag;
 
     @GetMapping(value = "/login")
     public String loginPage(Model model) {
-        model.addAttribute("object", new MyUser());
-        return "form_login";
-    }
-
-    @GetMapping(value = "/logout")
-    public String logoutPage(Model model) {
-        model.addAttribute("title", "You sure? Log out");
-        return "logout";
+        ///model.addAttribute("object", new MyUser());
+        return "redirect:/";
     }
 
     @GetMapping(value = "/registration")
-    public String registrationPage(Model model) {
+    public String registrationPage(Model model, Principal principal) {
+        String theme = principal == null ? "light" : service.findByLogin(principal.getName()).getDesign();
+        model.addAttribute("design", theme);
+        model.addAttribute("tags", serviceTag.allTags());
         model.addAttribute("object", new MyUser());
         return "form_registration";
     }
@@ -70,5 +71,11 @@ public class UserController {
         MyUser user = service.findByLogin(userInfo.getUsername());
         model.addAttribute("user", user);
         return "detail_user";
+    }
+
+    @PostMapping(value = "/user/theme")
+    public String changeTheme(HttpServletRequest request) {
+        service.setDesign(request.getParameter("theme"), Long.valueOf(request.getParameter("id")));
+        return "redirect:" + request.getHeader("referer");
     }
 }

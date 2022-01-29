@@ -63,6 +63,10 @@ public class MyUser {
     @JsonManagedReference
     private List<Comment> comments;
     
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<UserLike> likes;
+    
     @OneToMany(mappedBy="user")
     @JsonBackReference
     private List<course.collectionmanager.model.Collection> collections;

@@ -5,8 +5,6 @@ import java.util.Date;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface MyUserRepository extends JpaRepository<MyUser, Long> {
@@ -22,6 +20,10 @@ public interface MyUserRepository extends JpaRepository<MyUser, Long> {
     @Modifying
     @Query("update MyUser u set u.role=?1 where u.id=?2")
     void setRoleById(String role, Long id);
+    
+    @Modifying
+    @Query("update MyUser u set u.design=?1 where u.id=?2")
+    void setDesignById(String design, Long id);
     
     @Modifying
     @Query("update MyUser u set u.description=?1 where u.id=?2")

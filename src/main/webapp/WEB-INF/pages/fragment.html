@@ -26,6 +26,37 @@
             </form>
         </div>
     </div>
+
+    <div class="row navigation align-items-center" th:fragment="min-header">
+        <div class="col-9 d-flex">
+            <a th:href="@{/}">
+                <span class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                    </svg>Main
+                </span>
+            </a>
+        </div>
+        <div class="col-3">
+            <form th:action="@{/search}">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <button class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:fragment="tag-cloud">
+        <h2 class="title">Tag cloud</h2>
+        <div class="tag-cloud d-flex justify-content-end flex-wrap">
+            <th:block th:each="tag:${tags}">
+                <a th:href="@{'/items?tag='+${tag.id}}" th:text="${tag.name}"></a>
+            </th:block>
+        </div>
+    </div>
 </body>
 
 </html>

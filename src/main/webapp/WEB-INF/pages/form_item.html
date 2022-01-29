@@ -6,12 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link th:if="${design}=='dark'" th:href="@{/resources/css/root_dark.css}" rel="stylesheet" type="text/css" />
+    <link th:if="${design}=='light'" th:href="@{/resources/css/root_light.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/resources/css/style_detail.css}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <header class="header">
-        <div class="container" th:insert="fragment::header"></div>
+        <div class="container" th:insert="fragment::min-header"></div>
     </header>
     <div class="container">
         <div class="row py-4">

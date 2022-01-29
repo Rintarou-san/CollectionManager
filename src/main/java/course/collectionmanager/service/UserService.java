@@ -6,19 +6,21 @@ import java.util.List;
 public interface UserService {
 
     public List<MyUser> allUsers();
-    
+
     public MyUser findByLogin(String login);
-    
+
     public MyUser getById(long id);
 
     public boolean add(MyUser user);
-    
+
     public void setStatus(MyUser user);
-    
+
     public void setRole(MyUser user);
-    
+
+    public void setDesign(String design, Long id);
+
     public void setDescription(String description);
-    
+
     public void setLastLogin(MyUser user);
 
     public boolean delete(long id);

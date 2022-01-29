@@ -105,5 +105,9 @@ public class Item {
     @OneToMany(mappedBy = "item")
     @JsonManagedReference
     private List<Comment> comments;
+    
+    @OneToMany(mappedBy = "item")
+    @JsonManagedReference
+    private List<UserLike> likes;
 
 }

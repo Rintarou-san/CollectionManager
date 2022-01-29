@@ -1,9 +1,13 @@
 package course.collectionmanager.controller;
 
+import course.collectionmanager.model.Comment;
 import course.collectionmanager.model.Field;
 import course.collectionmanager.model.Item;
+import course.collectionmanager.model.UserLike;
 import course.collectionmanager.service.FieldService;
 import course.collectionmanager.service.ItemService;
+import course.collectionmanager.service.UserService;
+import java.security.Principal;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequestMapping(value = "/items")
@@ -24,9 +27,12 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
-    
+
     @Autowired
     private FieldService fieldService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "/all")
     public ResponseEntity<Object> all() {
@@ -36,19 +42,24 @@ public class ItemController {
     }
 
     @GetMapping(value = "/{title}")
-    public String detail(@PathVariable(name = "title") String title, @RequestParam(name = "id", required = true) long id, Model model) {
+    public String detail(@PathVariable(name = "title") String title, @RequestParam(name = "id", required = true) long id,
+            Model model, Principal principal) {
+        String theme = principal == null ? "light" : userService.findByLogin(principal.getName()).getDesign();
+        model.addAttribute("design", theme);
         model.addAttribute("item", itemService.getById(id));
         model.addAttribute("items", itemService.allItems());
-       return "detail_item";
+        model.addAttribute("newComment", new Comment());
+        model.addAttribute("newLike", new UserLike());
+        return "detail_item";
     }
-    
-    @GetMapping(value="/fields")
+
+    @GetMapping(value = "/fields")
     public ResponseEntity<Object> allFields() {
         List<Field> fields = fieldService.allFields();
         return fields != null && !fields.isEmpty() ? new ResponseEntity<>(fields, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @PostMapping(value = "/add")
     public String addItem(HttpServletRequest request, Item item) {
         itemService.add(item);

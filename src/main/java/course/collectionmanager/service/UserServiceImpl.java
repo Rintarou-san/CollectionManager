@@ -86,4 +86,10 @@ public class UserServiceImpl implements UserService {
         MyUser user = repository.findByLogin(userInfo.getUsername());
         repository.setDescriptionById(description, user.getId());
     }
+
+    @Override
+    @Transactional
+    public void setDesign(String design, Long id) {
+        repository.setDesignById(design, id);
+    }
 }

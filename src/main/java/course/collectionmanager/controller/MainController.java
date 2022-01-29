@@ -1,9 +1,9 @@
 package course.collectionmanager.controller;
 
 import course.collectionmanager.model.MyUser;
-import course.collectionmanager.service.ItemService;
 import course.collectionmanager.service.TagService;
 import course.collectionmanager.service.UserService;
+import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +18,12 @@ public class MainController {
     @Autowired
     private TagService serviceTag;
 
-    @Autowired
-    private ItemService serviceItem;
-
     @GetMapping(value = "/")
-    public String home(Model model) {
+    public String home(Model model, Principal principal) {
+        String theme = principal == null ?  "light" : serviceUser.findByLogin(principal.getName()).getDesign();
         model.addAttribute("tags", serviceTag.allTags());
         model.addAttribute("object", new MyUser());
+        model.addAttribute("design", theme);
         return "index";
     }
 

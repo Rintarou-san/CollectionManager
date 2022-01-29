@@ -6,65 +6,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/resources/css/style_form.css}" rel="stylesheet" type="text/css" />
+    <link th:if="${design}=='dark'" th:href="@{/resources/css/root_dark.css}" rel="stylesheet" type="text/css" />
+    <link th:if="${design}=='light'" th:href="@{/resources/css/root_light.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/resources/css/style_detail.css}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+    <header class="header">
+        <div class="container" th:insert="fragment::min-header"></div>
+    </header>
     <div class="container">
-        <div class="form-section">
-            <div class="row justify-content-center">
-                <h1 class="form-title" th:text="${title}"></h1>
-            </div>
-            <div class="row justify-content-center">
-                <div class="form-content d-flex justify-content-center">
-                    <form th:action="@{(${url})}" method="post" th:object="${object}" class="form">
+        <div class="row py-4">
+            <div class="col-8">
+                <h2 th:if="${editCollection}" class="title center-title">Edit collection</h2>
+                <h2 th:unless="${editCollection}" class="title center-title">Create new collection</h2>
+                <th:block th:if="${editCollection}">
+                    <form th:action="@{/collection/edit}" method="post" th:object="${object}" class="form">
+                        <input type="hidden" name="id" th:value=${editCollection.id}>
+                        <input type="hidden" name="user" th:value=${editCollection.user.id}>
                         <div class="row my-3">
-                            <label for="name" class="col-5 col-form-label label-style">Collection's title</label>
-                            <div class="col-7">
-                                <input type="text" class="form-control" id="name" name="name">
+                            <label for="name" class="col-4 col-form-label label-style">Collection title</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="name" name="name" th:value="${editCollection.name}">
                             </div>
                         </div>
                         <div class="row my-3">
-                            <label for="image" class="col-5 col-form-label label-style">Collection's image</label>
-                            <div class="col-7">
+                            <label for="image" class="col-4 col-form-label label-style">Collection image</label>
+                            <div class="col-8">
                                 <input type="file" class="form-control" id="image" name="image">
                             </div>
                         </div>
                         <div class="row my-3">
-                            <label for="description" class="col-5 col-form-label label-style">Collection's description</label>
-                            <div class="col-7">
+                            <label for="description" class="col-4 col-form-label label-style">Collection description</label>
+                            <div class="col-8">
+                                <textarea type="text" class="form-control form-textarea" id="description" name="description" th:text="${editCollection.description}"></textarea>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <legend class="legend-title">Collection tags</legend>
+                            <div class="row my-3">
+                                <div class="col-4"></div>
+                                <div class="col-8 d-flex flex-wrap">
+                                    <th:block th:each="tag:${tags}">
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input th:if="${editCollection.tags.^[name=='__${tag.name}__']}" class="form-check-input" type="checkbox" th:id="${tag.name+tag.id}" th:value="${tag.id}" th:name="tags" checked>
+                                                <input th:unless="${editCollection.tags.^[name=='__${tag.name}__']}" class="form-check-input" type="checkbox" th:id="${tag.name+tag.id}" th:value="${tag.id}" th:name="tags">
+                                                <label class="form-check-label" th:for="${tag.name+tag.id}" th:text="${tag.name}"></label>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend class="legend-title">Collection attributes</legend>
+                            <div class="row my-3">
+                                <div class="col-4"></div>
+                                <div class="col-8 d-flex flex-wrap">
+                                    <th:block th:each="field:${fields}">
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input th:if="${editCollection.fields.^[classField == '__${field.classField}__']}" class="form-check-input" type="checkbox" th:id="${field.classField}" th:value="${field.id}" th:name="fields" checked>
+                                                <input th:unless="${editCollection.fields.^[classField == '__${field.classField}__']}" class="form-check-input" type="checkbox" th:id="${field.classField}" th:value="${field.id}" th:name="fields">
+                                                <label class="form-check-label" th:for="${field.classField}" th:text="${field.title}"></label>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row justify-content-center">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-submit btn-style">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </th:block>
+                <th:block th:if="${editCollection}==null">
+                    <form th:action="@{/collection/create}" method="post" th:object="${object}" class="form">
+                        <div class="row my-3">
+                            <label for="name" class="col-4 col-form-label label-style">Collection title</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <label for="image" class="col-4 col-form-label label-style">Collection image</label>
+                            <div class="col-8">
+                                <input type="file" class="form-control" id="image" name="image">
+                            </div>
+                        </div>
+                        <div class="row my-3">
+                            <label for="description" class="col-4 col-form-label label-style">Collection description</label>
+                            <div class="col-8">
                                 <textarea type="text" class="form-control form-textarea" id="description" name="description"></textarea>
                             </div>
                         </div>
-                        <fieldset class="fields-area">
-                            <legend class="legend-title">Collection's tags</legend>
+                        <fieldset>
+                            <legend class="legend-title">Collection tags</legend>
                             <div class="row my-3">
-                                <th:block th:each="tag:${tags}">
-                                    <div class="col-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" th:id="${tag.name}" th:value="${tag.id}" th:name="tags">
-                                            <label class="form-check-label" th:for="${tag.name}" th:text="${tag.name}"></label>
+                                <div class="col-4"></div>
+                                <div class="col-8 d-flex flex-wrap">
+                                    <th:block th:each="tag:${tags}">
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" th:id="${tag.name+tag.id}" th:value="${tag.id}" th:name="tags">
+                                                <label class="form-check-label" th:for="${tag.name+tag.id}" th:text="${tag.name}"></label>
+                                            </div>
                                         </div>
-                                    </div>
-                                </th:block>
+                                    </th:block>
+                                </div>
                             </div>
                         </fieldset>
-                        <fieldset class="fields-area">
-                            <legend class="legend-title">Collection's attributes</legend>
+                        <fieldset>
+                            <legend class="legend-title">Collection attributes</legend>
                             <div class="row my-3">
-                                <th:block th:each="field:${fields}" th:if="${field.title}">
-                                    <div class="col-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" th:id="${field.classField}" th:value="${field.id}" th:name="fields">
-                                            <label class="form-check-label" th:for="${field.classField}" th:text="${field.title}"></label>
+                                <div class="col-4"></div>
+                                <div class="col-8 d-flex flex-wrap">
+                                    <th:block th:each="field:${fields}">
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" th:id="${field.classField}" th:value="${field.id}" th:name="fields">
+                                                <label class="form-check-label" th:for="${field.classField}" th:text="${field.title}"></label>
+                                            </div>
                                         </div>
-                                    </div>
-                                </th:block>
+                                    </th:block>
+                                </div>
                             </div>
                         </fieldset>
-                        <button type="submit" class="btn btn-submit btn-style">Submit</button>
+                        <div class="row justify-content-center">
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-submit btn-style">Submit</button>
+                            </div>
+                        </div>
                     </form>
-                </div>
+                </th:block>
+            </div>
+            <div class="col-4">
+                <h2 class="title">All collections</h2>
+                <ul class="menu-collections">
+                    <th:block th:each="menu:${collections}">
+                        <li><a th:href="@{'/collection/'+${menu.name}+'?id='+${menu.id}}" th:text="${menu.name}"></a></li>
+                    </th:block>
+                </ul>
             </div>
         </div>
     </div>

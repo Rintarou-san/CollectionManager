@@ -3,13 +3,17 @@ package course.collectionmanager.controller;
 import course.collectionmanager.model.Collection;
 import course.collectionmanager.model.Comment;
 import course.collectionmanager.model.Item;
+import course.collectionmanager.model.UserLike;
 import course.collectionmanager.service.AlcoholService;
 import course.collectionmanager.service.CollectionService;
 import course.collectionmanager.service.CommentService;
 import course.collectionmanager.service.CoverService;
 import course.collectionmanager.service.FieldService;
 import course.collectionmanager.service.GenreService;
+import course.collectionmanager.service.LikeService;
 import course.collectionmanager.service.TagService;
+import course.collectionmanager.service.UserService;
+import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +41,9 @@ public class CollectionController {
     private CommentService serviceComment;
 
     @Autowired
+    private LikeService serviceLike;
+
+    @Autowired
     private AlcoholService serviceAlcohol;
 
     @Autowired
@@ -45,16 +52,24 @@ public class CollectionController {
     @Autowired
     private GenreService serviceGenre;
 
+    @Autowired
+    private UserService serviceUser;
+
     @GetMapping(value = "/{title}")
-    public String detail(@RequestParam(name = "id") long id, Model model) {
+    public String detail(@RequestParam(name = "id") long id, Model model, Principal principal) {
+        String theme = principal == null ? "light" : serviceUser.findByLogin(principal.getName()).getDesign();
+        model.addAttribute("design", theme);
         model.addAttribute("collection", serviceCollection.getById(id));
         model.addAttribute("collections", serviceCollection.allCollections());
         model.addAttribute("newComment", new Comment());
+        model.addAttribute("newLike", new UserLike());
         return "detail_collection";
     }
 
     @GetMapping(value = "/create")
-    public String createPage(Model model) {
+    public String createPage(Model model, Principal principal) {
+        String theme = principal == null ? "light" : serviceUser.findByLogin(principal.getName()).getDesign();
+        model.addAttribute("design", theme);
         model.addAttribute("title", "Create Collection");
         model.addAttribute("url", "/collection/create");
         model.addAttribute("object", new Collection());
@@ -81,8 +96,16 @@ public class CollectionController {
         return "redirect:" + request.getHeader("referer");
     }
 
+    @PostMapping(value = "/like")
+    public String addLike(UserLike like, HttpServletRequest request) {
+        serviceLike.add(like);
+        return "redirect:" + request.getHeader("referer");
+    }
+
     @GetMapping(value = "/{title}/{id}/add")
-    public String addPage(@PathVariable(name = "id") long id, Model model, HttpServletRequest request) {
+    public String addPage(@PathVariable(name = "id") long id, Model model, HttpServletRequest request, Principal principal) {
+        String theme = principal == null ? "light" : serviceUser.findByLogin(principal.getName()).getDesign();
+        model.addAttribute("design", theme);
         model.addAttribute("object", new Item());
         model.addAttribute("collection", serviceCollection.getById(id));
         model.addAttribute("tags", serviceTag.allTags());
@@ -92,4 +115,19 @@ public class CollectionController {
         return "form_item";
     }
 
+    @GetMapping(value = "/edit")
+    public String editCollectionPage(@RequestParam(name = "id") Long id, Model model, Principal principal) {
+        String theme = principal == null ? "light" : serviceUser.findByLogin(principal.getName()).getDesign();
+        model.addAttribute("design", theme);
+        model.addAttribute("editCollection", serviceCollection.getById(id));
+        model.addAttribute("tags", serviceTag.allTags());
+        model.addAttribute("fields", serviceField.allFields());
+        return "form_collection";
+    }
+
+    @PostMapping(value = "/edit")
+    public String editCollection(Collection collection) {
+        serviceCollection.edit(collection);
+        return "redirect:/user/profile";
+    }
 }

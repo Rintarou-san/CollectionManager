@@ -6,48 +6,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/resources/css/style_form.css}" rel="stylesheet" type="text/css" />
+    <link th:if="${design}=='dark'" th:href="@{/resources/css/root_dark.css}" rel="stylesheet" type="text/css" />
+    <link th:if="${design}=='light'" th:href="@{/resources/css/root_light.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/resources/css/style_detail.css}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+    <header class="header">
+        <div class="container" th:insert="fragment::min-header"></div>
+    </header>
     <div class="container">
-        <div class="form-section">
-            <div class="row justify-content-center">
-                <h1 class="form-title">Registration</h1>
-            </div>
-            <div class="row justify-content-center">
-                <div class="form-content">
-                    <div th:if="${#httpServletRequest.getParameter('message')}" class="row justify-content-center">
+        <div class="row py-4">
+            <div class="col-9">
+                <div th:if="${#httpServletRequest.getParameter('message')}" class="row justify-content-center">
                         <p class="message error-message" th:text="${#httpServletRequest.getParameter('message')}"></p>
                     </div>
-                    <div class="row justify-content-center">
+                <div class="row justify-content-center">
+                    <div class="col-7">
+                        <h2 class="title login-title">Registration</h2>
                         <form th:action="@{/registration}" method="post" th:object="${object}" class="form">
                             <div class="row my-3">
-                                <label for="login" class="col-4 col-form-label label-style">Login</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" id="login" name="login" required>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="login" name="login" placeholder="Login *" required>
                                 </div>
                             </div>
                             <div class="row my-3">
-                                <label for="email" class="col-4 col-form-label label-style">Email address</label>
-                                <div class="col-8">
-                                    <input type="text" class="form-control" id="email" name="email" required>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email address *" required>
                                 </div>
                             </div>
                             <div class="row my-3">
-                                <label for="password" class="col-4 col-form-label label-style">Password</label>
-                                <div class="col-8">
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                <div class="col-12">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password *" required>
                                 </div>
                             </div>
                             <div class="row my-3">
-                                <label for="repeatPassword" class="col-4 col-form-label label-style">Repeat password</label>
-                                <div class="col-8">
-                                    <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required>
+                                <div class="col-12">
+                                    <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="Confirm password *" required>
                                 </div>
                             </div>
-                            <div class="row justify-content-center">
-                                <p class="message">All field is required</p>
+                            <div class="row">
+                                <p class="message" id="message"></p>
+                                <p class="message">* All fields is required</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <textarea class="form-control form-textarea" id="description" name="description" placeholder="If you want you can tell us about yourself..."></textarea>
+                                </div>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-3 justify-content-center">
@@ -58,9 +63,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="col-3">
+                <div th:replace="fragment::tag-cloud"></div>
+            </div>
+        </div>   
     </div>
     <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/resources/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/resources/js/home.js}"></script>
 </body>
 
 </html>
