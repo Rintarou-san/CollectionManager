@@ -254,6 +254,7 @@ span svg {
     border: none;
     transition: all .1s linear;
 }
+
 .dropdown-menu li a:hover {
     color: var(--ocean-green);
     text-decoration: underline;
@@ -572,14 +573,17 @@ span svg {
     list-style: none;
     padding: 0;
 }
-.accordion-menu-item li{
+
+.accordion-menu-item li {
     border-bottom: 1px solid transparent;
 }
-.accordion-menu-item li a{
+
+.accordion-menu-item li a {
     text-decoration: none;
     color: var(--dark-gray);
     transition: all .1s linear;
 }
+
 .accordion-menu-item li a:hover {
     text-decoration: underline;
     color: var(--ocean-green);
@@ -613,6 +617,7 @@ span svg {
     list-style: none;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
     margin: 0;
 }
 
@@ -685,6 +690,16 @@ span svg {
 .form-check-input:checked {
     background-color: var(--ocean-green);
     border-color: var(--dark-ocean-green);
+}
+
+.form-control::placeholder {
+    color: white;
+}
+
+@media(max-width: 992px) {
+    .form-control::placeholder {
+        color: #6c757d;
+    }
 }
 
 .dropdown-toggle {

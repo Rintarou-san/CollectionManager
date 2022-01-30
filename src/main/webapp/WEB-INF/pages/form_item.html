@@ -17,33 +17,34 @@
     </header>
     <div class="container">
         <div class="row py-4">
-            <div class="col-8">
+            <div class="col-12 col-lg-8">
                 <h2 class="title center-title">Add item</h2>
                 <form th:action="@{/items/add}" method="post" th:object="${object}" class="form">
+                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="hidden" name="collection" th:value=${collection.id}>
                     <div class="row my-3">
-                        <label for="name" class="col-4 col-form-label label-style">Item's title</label>
-                        <div class="col-8">
-                            <input type="text" class="form-control" id="name" name="name">
+                        <label for="name" class="d-none d-lg-block col-4 col-form-label label-style">Item's title</label>
+                        <div class="col-12 col-lg-8">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Item's title">
                         </div>
                     </div>
                     <div class="row my-3">
-                        <label for="image" class="col-4 col-form-label label-style">Item's image</label>
-                        <div class="col-8">
+                        <label for="image" class="d-none d-lg-block col-4 col-form-label label-style">Item's image</label>
+                        <div class="col-12 col-lg-8">
                             <input type="file" class="form-control" id="image" name="image">
                         </div>
                     </div>
                     <div class="row my-3">
-                        <label for="description" class="col-4 col-form-label label-style">Item's description</label>
-                        <div class="col-8">
-                            <textarea type="text" class="form-control form-textarea" id="description" name="description"></textarea>
+                        <label for="description" class="d-none d-lg-block col-4 col-form-label label-style">Item's description</label>
+                        <div class="col-12 col-lg-8">
+                            <textarea type="text" class="form-control form-textarea" id="description" name="description" placeholder="Item's description"></textarea>
                         </div>
                     </div>
                     <fieldset>
                         <legend class="legend-title">Item's tags</legend>
                         <div class="row my-3">
                             <div class="col-4"></div>
-                            <div class="col-8 d-flex flex-wrap">
+                            <div class="col-12 col-lg-8 d-flex flex-wrap">
                                 <th:block th:each="tag:${tags}">
                                     <div class="col-6">
                                         <div class="form-check">
@@ -58,57 +59,58 @@
                     <fieldset>
                         <legend class="legend-title">Item's specification</legend>
                         <div th:if="${collection.fields.^[classField == 'year']}" class="row my-3">
-                            <label for="year" class="col-4 col-form-label label-style">Year</label>
-                            <div class="col-8">
-                                <input type="text" class="form-control" id="year" name="year">
+                            <label for="year" class="d-none d-lg-block col-4 col-form-label label-style">Year</label>
+                            <div class="col-12 col-lg-8">
+                                <input type="text" class="form-control" id="year" name="year" placeholder="Year">
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'yearOfPublishing']}" class="row my-3">
-                            <label for="yearOfPublishing" class="col-4 col-form-label label-style">Year of publishing</label>
-                            <div class="col-8">
-                                <input type="number" class="form-control" id="yearOfPublishing" name="yearOfPublishing">
+                            <label for="yearOfPublishing" class="d-none d-lg-block col-4 col-form-label label-style">Year of publishing</label>
+                            <div class="col-12 col-lg-8">
+                                <input type="number" class="form-control" id="yearOfPublishing" name="yearOfPublishing" placeholder="Year of publishing">
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'price']}" class="row my-3">
-                            <label for="price" class="col-4 col-form-label label-style">Price</label>
-                            <div class="col-8">
+                            <label for="price" class="d-none d-lg-block col-4 col-form-label label-style">Price</label>
+                            <div class="col-12 col-lg-8">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" id="price" name="price">
+                                    <input type="number" class="form-control" id="price" name="price" placeholder="Price">
                                     <span class="input-group-text">$</span>
                                 </div>
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'country']}" class="row my-3">
-                            <label for="country" class="col-4 col-form-label label-style">Country</label>
-                            <div class="col-8">
-                                <input type="text" class="form-control" id="country" name="country">
+                            <label for="country" class="d-none d-lg-block col-4 col-form-label label-style">Country</label>
+                            <div class="col-12 col-lg-8">
+                                <input type="text" class="form-control" id="country" name="country" placeholder="Country">
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'author']}" class="row my-3">
-                            <label for="author" class="col-4 col-form-label label-style">Author</label>
-                            <div class="col-8">
-                                <input type="text" class="form-control" id="author" name="author">
+                            <label for="author" class="d-none d-lg-block col-4 col-form-label label-style">Author</label>
+                            <div class="col-12 col-lg-8">
+                                <input type="text" class="form-control" id="author" name="author" placeholder="Author">
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'fandom']}" class="row my-3">
-                            <label for="fandom" class="col-4 col-form-label label-style">Fandom</label>
-                            <div class="col-8">
-                                <input type="text" class="form-control" id="fandom" name="fandom">
+                            <label for="fandom" class="d-none d-lg-block col-4 col-form-label label-style">Fandom</label>
+                            <div class="col-12 col-lg-8">
+                                <input type="text" class="form-control" id="fandom" name="fandom" placeholder="Fandom">
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'alcoholPercentage']}" class="row my-3">
-                            <label for="alcoholPercentage" class="col-4 col-form-label label-style">Alcohol percentage</label>
-                            <div class="col-8">
+                            <label for="alcoholPercentage" class="d-none d-lg-block col-4 col-form-label label-style">Alcohol percentage</label>
+                            <div class="col-12 col-lg-8">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" id="alcoholPercentage" name="alcoholPercentage">
+                                    <input type="number" class="form-control" id="alcoholPercentage" name="alcoholPercentage" placeholder="Alcohol percentage">
                                     <span class="input-group-text">%</span>
                                 </div>
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'alcoholType']}" class="row my-3">
-                            <label for="alcoholType" class="col-4 col-form-label label-style">Alcohol type</label>
-                            <div class="col-8">
+                            <label for="alcoholType" class="d-none d-lg-block col-4 col-form-label label-style">Alcohol type</label>
+                            <div class="col-12 col-lg-8">
                                 <select name="alcoholType" id="alcoholType" class="form-select">
+                                   <option value="" hidden>Alcohol type</option>
                                     <th:block th:each="type:${alcohol}">
                                         <option th:value="${type.id}" th:text="${type.name}"></option>
                                     </th:block>
@@ -116,32 +118,32 @@
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'numberOfSheets']}" class="row my-3">
-                            <label for="numberOfSheets" class="col-4 col-form-label label-style">Number of sheets</label>
-                            <div class="col-8">
-                                <input type="number" class="form-control" id="numberOfSheets" name="numberOfSheets">
+                            <label for="numberOfSheets" class="d-none d-lg-block col-4 col-form-label label-style">Number of sheets</label>
+                            <div class="col-12 col-lg-8">
+                                <input type="number" class="form-control" id="numberOfSheets" name="numberOfSheets" placeholder="Number of sheets">
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'sizeWidth']}" class="row my-3">
-                            <label for="sizeWidth" class="col-4 col-form-label label-style">Width</label>
-                            <div class="col-8">
+                            <label for="sizeWidth" class="d-none d-lg-block col-4 col-form-label label-style">Width</label>
+                            <div class="col-12 col-lg-8">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" id="sizeWidth" name="sizeWidth">
+                                    <input type="number" class="form-control" id="sizeWidth" name="sizeWidth" placeholder="Width">
                                     <span class="input-group-text">mm</span>
                                 </div>
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'sizeHeight']}" class="row my-3">
-                            <label for="sizeHeight" class="col-4 col-form-label label-style">Height</label>
-                            <div class="col-8">
+                            <label for="sizeHeight" class="d-none d-lg-block col-4 col-form-label label-style">Height</label>
+                            <div class="col-12 col-lg-8">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" id="sizeHeight" name="sizeHeight">
+                                    <input type="number" class="form-control" id="sizeHeight" name="sizeHeight" placeholder="Height">
                                     <span class="input-group-text">mm</span>
                                 </div>
                             </div>
                         </div>
                         <div class="row my-3">
                             <div class="col-4"></div>
-                            <div class="col-8 d-flex">
+                            <div class="col-12 col-lg-8 d-flex">
                                 <div th:if="${collection.fields.^[classField == 'pageLine']}" class="col-4 form-check">
                                     <input class="form-check-input" type="checkbox" id="pageLine" name="pageLine">
                                     <label class="form-check-label" for="pageLine">Page line</label>
@@ -157,9 +159,10 @@
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'coverType']}" class="row my-3">
-                            <label for="coverType" class="col-4 col-form-label label-style">Cover type</label>
-                            <div class="col-8">
+                            <label for="coverType" class="d-none d-lg-block col-4 col-form-label label-style">Cover type</label>
+                            <div class="col-12 col-lg-8">
                                 <select name="coverType" id="coverType" class="form-select">
+                                   <option value="" hidden>Cover type</option>
                                     <th:block th:each="material:${materials}">
                                         <option th:value="${material.id}" th:text="${material.name}"></option>
                                     </th:block>
@@ -167,9 +170,10 @@
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'jewelryType']}" class="row my-3">
-                            <label for="jewelryType" class="col-4 col-form-label label-style">Jewelry type</label>
-                            <div class="col-8">
+                            <label for="jewelryType" class="d-none d-lg-block col-4 col-form-label label-style">Jewelry type</label>
+                            <div class="col-12 col-lg-8">
                                 <select name="jewelryType" id="jewelryType" class="form-select">
+                                   <option value="" hidden>Jewelry type</option>
                                     <th:block th:each="jewelry:${jewelries}">
                                         <option th:value="${jewelry.id}" th:text="${jewelry.name}"></option>
                                     </th:block>
@@ -177,9 +181,10 @@
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'metal']}" class="row my-3">
-                            <label for="metal" class="col-4 col-form-label label-style">Preciuos metal</label>
-                            <div class="col-8">
+                            <label for="metal" class="d-none d-lg-block col-4 col-form-label label-style">Preciuos metal</label>
+                            <div class="col-12 col-lg-8">
                                 <select name="jewelryType" id="jewelryType" class="form-select">
+                                   <option value="" hidden>Preciuos metal</option>
                                     <th:block th:each="metal:${metals}">
                                         <option th:value="${metal.id}" th:text="${metal.name}"></option>
                                     </th:block>
@@ -187,25 +192,25 @@
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'paperDensity']}" class="row my-3">
-                            <label for="fineness" class="col-4 col-form-label label-style">Fineness</label>
-                            <div class="col-8">
+                            <label for="paperDensity" class="d-none d-lg-block col-4 col-form-label label-style">Paper density</label>
+                            <div class="col-12 col-lg-8">
                                 <div class="input-group">
-                                    <input type="number" class="form-control" id="fineness" name="fineness">
+                                    <input type="number" class="form-control" id="paperDensity" name="paperDensity" placeholder="Paper density">
                                     <span class="input-group-text">g/m²</span>
                                 </div>
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'fineness']}" class="row my-3">
-                            <label for="fineness" class="col-4 col-form-label label-style">Fineness</label>
-                            <div class="col-8">
-                                <input type="number" class="form-control" id="fineness" name="fineness">
+                            <label for="fineness" class="d-none d-lg-block col-4 col-form-label label-style">Fineness</label>
+                            <div class="col-12 col-lg-8">
+                                <input type="number" class="form-control" id="fineness" name="fineness" placeholder="Fineness">
                             </div>
                         </div>
                         <div th:if="${collection.fields.^[classField == 'genres']}" class="row my-3 align-items-center">
-                            <div class="col-4 label-style">
+                            <div class="col-12 col-lg-4">
                                 <label for="genres" class="col-form-label">Genres</label>
                             </div>
-                            <div class="col-8 d-flex flex-wrap">
+                            <div class="col-12 col-lg-8 d-flex flex-wrap">
                                 <th:block th:each="genre:${exGenre}">
                                     <div class="col-6 form-check">
                                         <input class="form-check-input" type="checkbox" th:id="${genre.id}" th:value="${genre.id}" name="genres">
@@ -222,7 +227,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-4">
+            <div class="d-none d-lg-block col-4">
                 <h2 class="title">All items</h2>
                 <ul class="menu-collections">
                     <li><a href="">ref</a></li>

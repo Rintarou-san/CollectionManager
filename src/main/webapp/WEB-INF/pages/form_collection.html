@@ -17,7 +17,7 @@
     </header>
     <div class="container">
         <div class="row py-4">
-            <div class="col-8">
+            <div class="col-12 col-lg-8">
                 <h2 th:if="${editCollection}" class="title center-title">Edit collection</h2>
                 <h2 th:unless="${editCollection}" class="title center-title">Create new collection</h2>
                 <th:block th:if="${editCollection}">
@@ -25,28 +25,28 @@
                         <input type="hidden" name="id" th:value=${editCollection.id}>
                         <input type="hidden" name="user" th:value=${editCollection.user.id}>
                         <div class="row my-3">
-                            <label for="name" class="col-4 col-form-label label-style">Collection title</label>
-                            <div class="col-8">
+                            <label for="name" class="d-none d-lg-block col-4 col-form-label label-style" placeholder="Collection title">Collection title</label>
+                            <div class="col-12 col-lg-8">
                                 <input type="text" class="form-control" id="name" name="name" th:value="${editCollection.name}">
                             </div>
                         </div>
                         <div class="row my-3">
-                            <label for="image" class="col-4 col-form-label label-style">Collection image</label>
-                            <div class="col-8">
+                            <label for="image" class="d-none d-lg-block col-4 col-form-label label-style">Collection image</label>
+                            <div class="col-12 col-lg-8">
                                 <input type="file" class="form-control" id="image" name="image">
                             </div>
                         </div>
                         <div class="row my-3">
-                            <label for="description" class="col-4 col-form-label label-style">Collection description</label>
-                            <div class="col-8">
+                            <label for="description" class="d-none d-lg-block col-4 col-form-label label-style" placeholder="Collection description">Collection description</label>
+                            <div class="col-12 col-lg-8">
                                 <textarea type="text" class="form-control form-textarea" id="description" name="description" th:text="${editCollection.description}"></textarea>
                             </div>
                         </div>
                         <fieldset>
                             <legend class="legend-title">Collection tags</legend>
                             <div class="row my-3">
-                                <div class="col-4"></div>
-                                <div class="col-8 d-flex flex-wrap">
+                                <div class="d-none d-lg-block col-4"></div>
+                                <div class="col-12 col-lg-8 d-flex flex-wrap">
                                     <th:block th:each="tag:${tags}">
                                         <div class="col-6">
                                             <div class="form-check">
@@ -62,8 +62,8 @@
                         <fieldset>
                             <legend class="legend-title">Collection attributes</legend>
                             <div class="row my-3">
-                                <div class="col-4"></div>
-                                <div class="col-8 d-flex flex-wrap">
+                                <div class="d-none d-lg-block col-4"></div>
+                                <div class="col-12 col-lg-8 d-flex flex-wrap">
                                     <th:block th:each="field:${fields}">
                                         <div class="col-6">
                                             <div class="form-check">
@@ -85,21 +85,22 @@
                 </th:block>
                 <th:block th:if="${editCollection}==null">
                     <form th:action="@{/collection/create}" method="post" th:object="${object}" class="form">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         <div class="row my-3">
-                            <label for="name" class="col-4 col-form-label label-style">Collection title</label>
-                            <div class="col-8">
+                            <label for="name" class="d-none d-lg-block col-4 col-form-label label-style" placeholder="Collection title">Collection title</label>
+                            <div class="col-12 col-lg-8">
                                 <input type="text" class="form-control" id="name" name="name">
                             </div>
                         </div>
                         <div class="row my-3">
-                            <label for="image" class="col-4 col-form-label label-style">Collection image</label>
-                            <div class="col-8">
+                            <label for="image" class="d-none d-lg-block col-4 col-form-label label-style">Collection image</label>
+                            <div class="col-12 col-lg-8">
                                 <input type="file" class="form-control" id="image" name="image">
                             </div>
                         </div>
                         <div class="row my-3">
-                            <label for="description" class="col-4 col-form-label label-style">Collection description</label>
-                            <div class="col-8">
+                            <label for="description" class="d-none d-lg-block col-4 col-form-label label-style" placeholder="Collection description">Collection description</label>
+                            <div class="col-12 col-lg-8">
                                 <textarea type="text" class="form-control form-textarea" id="description" name="description"></textarea>
                             </div>
                         </div>
@@ -107,7 +108,7 @@
                             <legend class="legend-title">Collection tags</legend>
                             <div class="row my-3">
                                 <div class="col-4"></div>
-                                <div class="col-8 d-flex flex-wrap">
+                                <div class="col-12 col-lg-8 d-flex flex-wrap">
                                     <th:block th:each="tag:${tags}">
                                         <div class="col-6">
                                             <div class="form-check">
@@ -123,7 +124,7 @@
                             <legend class="legend-title">Collection attributes</legend>
                             <div class="row my-3">
                                 <div class="col-4"></div>
-                                <div class="col-8 d-flex flex-wrap">
+                                <div class="col-12 col-lg-8 d-flex flex-wrap">
                                     <th:block th:each="field:${fields}">
                                         <div class="col-6">
                                             <div class="form-check">
@@ -143,7 +144,7 @@
                     </form>
                 </th:block>
             </div>
-            <div class="col-4">
+            <div class="d-none d-lg-block col-4">
                 <h2 class="title">All collections</h2>
                 <ul class="menu-collections">
                     <th:block th:each="menu:${collections}">
