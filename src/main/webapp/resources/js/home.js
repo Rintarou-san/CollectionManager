@@ -106,11 +106,12 @@ $('.tag-ref').click(function (event) {
     event.preventDefault();
     $.get(event.target.getAttribute('href'), {}, function (data) {
         $('#set-of-tag-cards').empty();
+        if(data===null) $('#set-of-tag-cards')[0].html("Not found");
         let template = $('#template-all-items');
         let header = $('#template-header');
         let parent = $('#set-of-tag-cards');
         let headerClone = header[0].content.cloneNode(true);
-        headerClone.querySelector('h1').innerHTML = `User's items and collections with tag '${event.target.name}'`;
+        headerClone.querySelector('h1').innerHTML = `User's items and collections with tag '${event.target.textContent}'`;
         parent.append(headerClone);
         data.forEach((item) => {
             let clone = template[0].content.cloneNode(true);
