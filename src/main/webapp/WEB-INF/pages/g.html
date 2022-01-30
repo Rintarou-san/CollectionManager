@@ -32,8 +32,6 @@
                             </svg>Main
                         </span>
                     </a>
-                    <a href="@{/items/all}">All items</a>
-                    <a href="@{/collections/all}">All collections</a>
                 </div>
                 <div class="col-3">
                     <form action="">
@@ -64,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-12 col-lg-8">
                 <div class="details-content d-flex">
                     <div class="photo"></div>
                     <div class="details">
@@ -75,7 +73,7 @@
                             </th:block>
                         </ul>
                     </div>
-                    <div class="buttons">
+                    <div class="d-none d-md-block buttons">
                         <form th:action="@{/collection/like}" th:object="${newLike}" method="post">
                             <input type="hidden" th:value="${item.id}" name="item">
                             <button th:if="${item.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like-fill">Like</button>
@@ -87,6 +85,23 @@
                         </th:block>
                     </div>
                 </div>
+                <div class="d-flex d-md-none m-0 my-3 buttons">
+                       <th:block th:if="${item.collection.user.login}==${#authentication.getPrincipal().getUsername()}">
+                           <div class="d-flex">
+                              <div class="col-7">
+                                  <a th:href="@{/collection/item/edit}" class="btn btn-submit btn-style">Edit</a>
+                              </div>
+                               <div class="col-7">
+                                   <a th:href="@{'/collection/item/delete?id='+${item.id}}" class="btn btn-submit btn-style">Delete</a>
+                               </div>
+                           </div>
+                        </th:block>
+                        <form th:action="@{/collection/like}" th:object="${newLike}" method="post">
+                            <input type="hidden" th:value="${item.id}" name="item">
+                            <button th:if="${item.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like-fill">Like</button>
+                            <button th:unless="${item.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like">Like</button>
+                        </form>
+                    </div>
                 <div class="fields-block">
                     <h3 class="title description-title">Specification</h3>
                     <table class="fields-table">

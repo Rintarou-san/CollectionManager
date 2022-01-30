@@ -45,7 +45,7 @@
                         </ul>
                         <p th:text="'Author: '+${collection.user.login}"></p>
                     </div>
-                    <div class="buttons">
+                    <div class="d-none d-md-block buttons">
                         <div class="col-4">
                             <form th:action="@{/collection/like}" th:object="${newLike}" method="post">
                                 <input type="hidden" th:value="${collection.id}" name="collection">
@@ -59,6 +59,23 @@
                         </th:block>
                     </div>
                 </div>
+                <div class="d-flex d-md-none m-0 my-3 buttons">
+                       <th:block th:if="${collection.user.login}==${#authentication.getPrincipal().getUsername()}">
+                           <div class="d-flex">
+                              <div class="col-7">
+                                  <a th:href="@{'/collection/edit?id='+${collection.id}}" class="btn btn-submit btn-style">Edit</a>
+                              </div>
+                               <div class="col-7">
+                                   <a th:href="@{'/collection/delete?id='+${collection.id}}" class="btn btn-submit btn-style">Delete</a>
+                               </div>
+                           </div>
+                        </th:block>
+                        <form th:action="@{/collection/like}" th:object="${newLike}" method="post">
+                            <input type="hidden" th:value="${collection.id}" name="collection">
+                            <button th:if="${collection.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like-fill">Like</button>
+                            <button th:unless="${collection.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like">Like</button>
+                        </form>
+                    </div>
                 <div class="description-block">
                     <h3 class="title description-title">Description</h3>
                     <p class="description-text" th:text="${collection.description}"></p>
