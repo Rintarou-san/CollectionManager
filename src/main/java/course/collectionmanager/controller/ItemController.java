@@ -63,6 +63,6 @@ public class ItemController {
     @PostMapping(value = "/add")
     public String addItem(HttpServletRequest request, Item item) {
         itemService.add(item);
-        return "redirect:" + request.getHeader("referer");
+        return "redirect:/user/profile";
     }
 }
