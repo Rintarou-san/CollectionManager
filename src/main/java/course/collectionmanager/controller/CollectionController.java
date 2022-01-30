@@ -89,7 +89,7 @@ public class CollectionController {
     @PostMapping(value = "/create")
     public String create(Collection collection) {
         serviceCollection.add(collection);
-        return "redirect:/";
+        return "redirect:/user/profile";
     }
 
     @GetMapping(value = "/delete")
