@@ -106,7 +106,7 @@ $('.tag-ref').click(function (event) {
     event.preventDefault();
     $.get(event.target.getAttribute('href'), {}, function (data) {
         $('#set-of-tag-cards').empty();
-        if(data===null) {
+        if(data===undefined) {
             $('#set-of-tag-cards')[0].html("Not found");
             return;
         }
