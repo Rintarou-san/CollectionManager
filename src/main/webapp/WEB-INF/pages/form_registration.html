@@ -25,6 +25,7 @@
                     <div class="col-7">
                         <h2 class="title login-title">Registration</h2>
                         <form th:action="@{/registration}" method="post" th:object="${object}" class="form">
+                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <div class="row my-3">
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="login" name="login" placeholder="Login *" required>

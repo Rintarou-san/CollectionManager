@@ -249,7 +249,7 @@ span svg {
 }
 
 .dropdown-menu li a {
-    color: var(--light-gray);
+    color: var(--dark-gray);
     text-decoration: none;
     border: none;
     transition: all .1s linear;
