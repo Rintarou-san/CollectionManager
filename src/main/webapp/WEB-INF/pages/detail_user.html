@@ -17,6 +17,22 @@
     </header>
     <div class="container">
         <div class="row py-4">
+            <div class="d-lg-none accordion mb-5" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">All collection</button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul class="accordion-menu-item">
+                                <th:block th:each="menu:${collections}">
+                                    <li><a th:href="@{'/collection/'+${menu.name}+'?id='+${menu.id}}" th:text="${menu.name}"></a></li>
+                                </th:block>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-8">
                 <div class="details-content d-flex justify-content-between">
                     <div class="d-flex">
@@ -29,9 +45,9 @@
                     <div class="buttons-block">
                         <div class="col-4">
                             <form th:action="@{/user/theme}" method="post">
-                               <input type="hidden" id="id" th:value="${user.id}" name="id">
-                               <input th:if="${user.design}=='light'" value="dark" type="hidden" name="theme">
-                               <input th:if="${user.design}=='dark'" value="light" type="hidden" name="theme">
+                                <input type="hidden" id="id" th:value="${user.id}" name="id">
+                                <input th:if="${user.design}=='light'" value="dark" type="hidden" name="theme">
+                                <input th:if="${user.design}=='dark'" value="light" type="hidden" name="theme">
                                 <button class="btn btn-submit btn-icon-style">
                                     <th:block th:if="${user.design}=='light'">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
@@ -45,6 +61,12 @@
                                     </th:block>
                                 </button>
                             </form>
+                            <a th:href="@{/collection/create}" class="d-lg-none btn btn-submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </a>
                         </div>
                         <div class="col-4"><a th:href="@{/}" class="btn btn-submit btn-icon-style">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16">
@@ -74,7 +96,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="d-none d-lg-block col-4">
                 <div class="row align-items-center">
                     <div class="col-6 d-flex justify-content-end">
                         <a th:href="@{/collection/create}" class="btn btn-submit">

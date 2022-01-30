@@ -14,9 +14,9 @@
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                 </svg></button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" th:href="@{/}">Main</a></li>
-                <li><a class="dropdown-item all-items" href="">All items</a></li>
-                <li><a class="dropdown-item all-collections" href="">All collections</a></li>
+                <li><a th:href="@{/}">Main</a></li>
+                <li><a class="all-items" href="">All items</a></li>
+                <li><a class="all-collections" href="">All collections</a></li>
             </ul>
         </div>
         <div class="col-9 d-none d-lg-flex">
@@ -37,7 +37,7 @@
     </div>
 
     <div class="row navigation align-items-center" th:fragment="min-header">
-        <div class="col-9 d-flex">
+        <div class="col-xxl-9 col-6 d-flex">
             <a th:href="@{/}">
                 <span class="d-flex align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -46,7 +46,7 @@
                 </span>
             </a>
         </div>
-        <div class="col-3">
+        <div class="col-xxl-3 col-6">
             <form th:action="@{/search}">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search...">

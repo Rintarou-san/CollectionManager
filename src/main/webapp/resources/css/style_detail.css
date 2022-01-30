@@ -557,6 +557,17 @@ span svg {
     vertical-align: middle;
 }
 
+.accordion-menu-item {
+    list-style: none;
+    padding: 0;
+}
+.accordion-menu-item li{
+    border-bottom: 1px solid transparent;
+}
+.accordion-menu-item li a:hover {
+    border-bottom: 1px solid var(--ocean-green);
+}
+
 /*End DETAILS*/
 
 /*FIELDS FOR ITEMS*/
@@ -649,7 +660,8 @@ span svg {
 .form-control:focus,
 .form-check-input:focus,
 .form-select:focus,
-.dropdown-toggle:focus {
+.dropdown-toggle:focus,
+.accordion-button:focus {
     box-shadow: 0 0 0 0.25rem rgb(12, 153, 120, 0.4);
 }
 
@@ -679,4 +691,28 @@ span svg {
 
 .dropdown-toggle::after {
     display: none;
+}
+
+.accordion-item {
+    background: transparent;
+}
+
+.accordion-button {
+    color: var(--dark-gray);
+    background: transparent;
+    border: 2px solid var(--ocean-green);
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--dark-gray);
+    background: transparent;
+    border: 2px solid var(--ocean-green);
+}
+
+.accordion-button:not(.collapsed)::after {
+    color: var(--dark-gray);
+}
+
+.accordion-button:focus {
+    border: none;
 }

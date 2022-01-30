@@ -49,88 +49,105 @@
         </div>
     </header>
     <div class="container">
-            <div class="row justify-content-center py-4">
-                <div class="col-xxl-9 col-lg-8 col-md-7 col-sm-5 col-12">
-                    <div class="row d-flex d-sm-block d-lg-flex justify-content-center my-4">
-                        <div class="card">
-                            <div class="card-details">
-                                <h2 class="title details-title best-collection-title" th:text="${commentCollection.name}"><a href="">Collection title</a></h2>
-                                <p class="collection-achievement" th:text="${#arrays.length(commentCollection.comments)}+' comments'">12 comments</p>
-                                <div class="collection-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta id porro, sint harum eum veniam est, minus sunt ipsum, enim debitis consequuntur optio adipisci, dolores veritatis. Asperiores sed cumque eaque iste consequuntur placeat odit vitae harum incidunt dicta in id doloremque assumenda amet laudantium, corporis provident ipsum, voluptatum nam labore suscipit ex molestiae eligendi animi. Soluta rerum numquam eligendi neque aperiam accusamus porro dignissimos incidunt cum ipsum sint quisquam sunt excepturi dolorum similique totam suscipit blanditiis nostrum, necessitatibus repellendus corporis perspiciatis officia accusantium quae! Iusto unde rem repudiandae, numquam veniam fugiat, in ad magnam magni consectetur, ea, ratione assumenda minus!</div>
+        <div class="row py-4">
+            <div class="d-lg-none accordion mb-5" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">All items</button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul class="accordion-menu-item">
+                                <li><a th:href="@{'/items/'+${menu.name}+'?id='+${menu.id}}" th:text="${menu.name}">Books by M. Bulgakov</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="card">
-                            <div class="card-details">
-                                <h2 class="title details-title best-collection-title" th:text="${commentCollection.name}"><a href="">Collection title</a></h2>
-                                <p class="collection-achievement" th:text="${#arrays.length(commentCollection.comments)}+' comments'">12 comments</p>
-                                <div class="collection-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta id porro, sint harum eum veniam est, minus sunt ipsum, enim debitis consequuntur optio adipisci, dolores veritatis. Asperiores sed cumque eaque iste consequuntur placeat odit vitae harum incidunt dicta in id doloremque assumenda amet laudantium, corporis provident ipsum, voluptatum nam labore suscipit ex molestiae eligendi animi. Soluta rerum numquam eligendi neque aperiam accusamus porro dignissimos incidunt cum ipsum sint quisquam sunt excepturi dolorum similique totam suscipit blanditiis nostrum, necessitatibus repellendus corporis perspiciatis officia accusantium quae! Iusto unde rem repudiandae, numquam veniam fugiat, in ad magnam magni consectetur, ea, ratione assumenda minus!</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                            <div class="card-details">
-                                <h2 class="title details-title best-collection-title" th:text="${commentCollection.name}"><a href="">Collection title</a></h2>
-                                <p class="collection-achievement" th:text="${#arrays.length(commentCollection.comments)}+' comments'">12 comments</p>
-                                <div class="collection-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta id porro, sint harum eum veniam est, minus sunt ipsum, enim debitis consequuntur optio adipisci, dolores veritatis. Asperiores sed cumque eaque iste consequuntur placeat odit vitae harum incidunt dicta in id doloremque assumenda amet laudantium, corporis provident ipsum, voluptatum nam labore suscipit ex molestiae eligendi animi. Soluta rerum numquam eligendi neque aperiam accusamus porro dignissimos incidunt cum ipsum sint quisquam sunt excepturi dolorum similique totam suscipit blanditiis nostrum, necessitatibus repellendus corporis perspiciatis officia accusantium quae! Iusto unde rem repudiandae, numquam veniam fugiat, in ad magnam magni consectetur, ea, ratione assumenda minus!</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" id="set-of-cards">
-
                 </div>
             </div>
-            <div class="col-xxl-3 col-lg-4 col-md-5 col-sm-7 col-8">
-                <div class="login-block mb-5">
-                    <div sec:authorize="!isAuthenticated()">
-                        <h2 class="title login-title">Login</h2>
-                        <div class="row p-0">
-                            <div th:if="${#httpServletRequest.getParameter('error')}" class="col-12 d-flex justify-content-center">
-                                <p class="message login-message error-message">Invalid username or password</p>
-                            </div>
-                            <div th:if="${#httpServletRequest.getParameter('logout')}" class="col-12 d-flex justify-content-center">
-                                <p class="message login-message success-message">Success log out</p>
-                            </div>
-                        </div>
-                        <form th:action="@{/login}" method="post" th:object="${object}" class="form">
-                            <div class="row my-3">
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
-                                </div>
-                            </div>
-                            <div class="row my-3">
-                                <div class="col-12">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-between">
-                                    <button type="submit" class="btn btn-submit btn-style">Sign in</button>
-                                    <a th:href="@{/registration}" class="btn btn-submit btn-style">Registration</a>
-                                </div>
-                            </div>
-                        </form>
+            <div class="col-8">
+                <div class="details-content d-flex">
+                    <div class="photo"></div>
+                    <div class="details">
+                        <h2 class="title details-title" th:text="${item.name}"></h2>
+                        <ul class="tags">
+                            <th:block th:each="tag:${item.tags}">
+                                <li><a th:href="@{'/tags/'+${tag.name}+'?id='+${tag.id}}" th:text="${tag.name}"></a></li>
+                            </th:block>
+                        </ul>
                     </div>
-                    <div sec:authorize="isAuthenticated()">
-                        <div class="row justify-content-center">
-                            <div class="photo-profile mb-5"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-between">
-                                <a th:href="@{/user/profile}" class="btn btn-submit btn-style">My profile</a>
-                                <form th:action="@{/logout}" method="post">
-                                    <button type="submit" class="btn btn-submit btn-style">
-                                    <span class="d-flex align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-</svg>Sign out
-                                    </span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                    <div class="buttons">
+                        <form th:action="@{/collection/like}" th:object="${newLike}" method="post">
+                            <input type="hidden" th:value="${item.id}" name="item">
+                            <button th:if="${item.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like-fill">Like</button>
+                            <button th:unless="${item.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like">Like</button>
+                        </form>
+                        <th:block th:if="${item.collection.user.login}==${#authentication.getPrincipal().getUsername()}">
+                            <div class="col-4"><a th:href="@{/collection/item/edit}" class="btn btn-submit btn-style">Edit</a></div>
+                            <div class="col-4"><a th:href="@{'/collection/item/delete?id='+${item.id}}" class="btn btn-submit btn-style">Delete</a></div>
+                        </th:block>
                     </div>
                 </div>
-                <div th:replace="fragment::tag-cloud"></div>
+                <div class="fields-block">
+                    <h3 class="title description-title">Specification</h3>
+                    <table class="fields-table">
+                       <th:block th:each="field:${item.collection.fields}" th:object="${item}" th:if="*{item['__${field.classField}__']}">
+                           <tr>
+                            <td class="field-header" th:text="${field.title}"></td>
+                            <td class="field-text">
+                                <th:block th:if="${field.type}=='array'">
+                                    <ul class="field-attributes">
+                                        <th:block th:each="attr:${item['__${field.classField}__']}">
+                                            <li th:text="${attr.name}"></li>
+                                        </th:block>
+                                    </ul>
+                                </th:block>
+                                <th:block th:unless="${field.type}=='array'" th:text="${item['__${field.classField}__']}"></th:block>
+                            </td>
+                        </tr>
+                       </th:block>
+                    </table>
+                </div>
+                <div class="description-block">
+                    <h3 class="title description-title">Description</h3>
+                    <p class="description-text" th:text="${item.description}"></p>
+                </div>
+                <div class="items-block">
+                    <h3 class="title description-title">Item's collection</h3>
+                    <ul class="items">
+                        <li>
+                        <a th:href="@{'/collection/'+${item.collection.name}+'?id='+${item.collection.id}}" th:text="${item.collection.name}">item</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="comments-block">
+                    <h3 class="title description-title">Item's comments</h3>
+                    <form th:action="@{/collection/add-comment}" th:object="${newComment}" method="post" class="form-send-comments">
+                       <input type="hidden" th:value="${item.id}" name="item">
+                        <textarea class="form-control form-textarea" placeholder="Write comment here..." name="text"></textarea>
+                        <button class="btn btn-submit btn-style">Send</button>
+                    </form>
+                    <ul class="comments">
+                       <th:block th:each="comment:${item.comments}">
+                           <li>
+                            <div class="row">
+                                <div class="col-9 comment-user" th:text="${comment.user.login}"></div>
+                                <div class="col-3 comment-date" th:text="'Date:'+${comment.date}"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 comment-text" th:text="${comment.text}"></div>
+                            </div>
+                        </li>
+                       </th:block>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-none d-lg-block col-4">
+                <h2 class="title">All items</h2>
+                <ul class="menu-collections">
+                   <th:block th:each="menu:${items}">
+                       <li><a th:href="@{'/items/'+${menu.name}+'?id='+${menu.id}}" th:text="${menu.name}">Books by M. Bulgakov</a></li>
+                   </th:block>
+                </ul>
             </div>
         </div>
     </div>
