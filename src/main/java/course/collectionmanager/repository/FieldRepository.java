@@ -1,10 +1,8 @@
 package course.collectionmanager.repository;
 
 import course.collectionmanager.model.Field;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface FieldRepository extends CrudRepository<Field, Long>{
+public interface FieldRepository extends JpaRepository<Field, Long> {
 
 }

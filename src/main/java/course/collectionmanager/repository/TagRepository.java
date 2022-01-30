@@ -1,10 +1,8 @@
 package course.collectionmanager.repository;
 
 import course.collectionmanager.model.Tag;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface TagRepository extends CrudRepository<Tag, Long> {
+public interface TagRepository extends JpaRepository<Tag, Long> {
 
 }

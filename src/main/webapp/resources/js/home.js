@@ -46,7 +46,7 @@ function fieldsToString(array) {
     return str;
 }
 
-$('#all-items').click(function (event) {
+$('.all-items').click(function (event) {
     event.preventDefault();
     $.get('/items/all', {}, function (data) {
         $('#set-of-cards').empty();
@@ -74,7 +74,7 @@ $('#all-items').click(function (event) {
     })
 })
 
-$('#all-collections').click(function (event) {
+$('.all-collections').click(function (event) {
     event.preventDefault();
     $.get('/collections/all', {}, function (data) {
         $('#set-of-cards').empty();

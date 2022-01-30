@@ -1,6 +1,7 @@
 package course.collectionmanager.controller;
 
 import course.collectionmanager.model.MyUser;
+import course.collectionmanager.service.CollectionService;
 import course.collectionmanager.service.TagService;
 import course.collectionmanager.service.UserService;
 import java.security.Principal;
@@ -17,6 +18,9 @@ public class MainController {
 
     @Autowired
     private TagService serviceTag;
+    
+    @Autowired
+    private CollectionService serviceCollection;
 
     @GetMapping(value = "/")
     public String home(Model model, Principal principal) {
@@ -24,6 +28,9 @@ public class MainController {
         model.addAttribute("tags", serviceTag.allTags());
         model.addAttribute("object", new MyUser());
         model.addAttribute("design", theme);
+        model.addAttribute("largeCollection", serviceCollection.largestCollection());
+        model.addAttribute("likeCollection", serviceCollection.likeCollection());
+        model.addAttribute("commentCollection", serviceCollection.commentCollection());
         return "index";
     }
 

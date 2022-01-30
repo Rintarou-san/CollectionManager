@@ -7,6 +7,8 @@ public interface ItemService {
 
     public List<Item> allItems();
 
+    public List<Item> findByTagId(Long id);
+
     public void add(Item item);
 
     public void delete(long id);

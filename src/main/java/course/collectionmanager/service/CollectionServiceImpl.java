@@ -4,6 +4,7 @@ import course.collectionmanager.model.Collection;
 import course.collectionmanager.model.MyUser;
 import course.collectionmanager.repository.CollectionRepository;
 import course.collectionmanager.repository.MyUserRepository;
+import course.collectionmanager.repository.TagRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Autowired
     private CollectionRepository repository;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     @Autowired
     private MyUserRepository userRepository;
@@ -52,6 +56,28 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public Collection getById(long id) {
         return repository.findById(id).get();
+    }
+
+    @Override
+    public List<Collection> findByTagId(Long id) {
+        List<Collection> collections = new ArrayList<>();
+        repository.findByTags(tagRepository.findById(id).get()).forEach(collections::add);
+        return collections;
+    }
+
+    @Override
+    public Collection largestCollection() {
+        return repository.largestCollection();
+    }
+
+    @Override
+    public Collection likeCollection() {
+        return repository.likeCollection();
+    }
+
+    @Override
+    public Collection commentCollection() {
+        return repository.commentCollection();
     }
 
 }

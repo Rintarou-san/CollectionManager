@@ -16,25 +16,28 @@
         <div class="container" th:insert="fragment::header"></div>
     </header>
     <div class="container">
-        <div class="row py-4">
-            <div class="col-9">
-                <div class="row justify-content-center my-4">
+        <div class="row justify-content-center py-4">
+            <div class="col-xxl-9 col-lg-8 col-md-7 col-sm-5 col-12">
+                <div class="row d-flex d-sm-block d-lg-flex justify-content-center my-4">
                     <div class="card">
-                        <div class="card-photo"></div>
                         <div class="card-details">
-                            <h2 class="title details-title">Collection title</h2>
+                            <h2 class="title details-title best-collection-title"><a th:href="@{'/collection/'+${commentCollection.name}+'?id='+${commentCollection.id}}" th:text="${commentCollection.name}"></a></h2>
+                            <p class="collection-achievement" th:text="${#arrays.length(commentCollection.comments)}+' comments'"></p>
+                            <div class="collection-description" th:text="${commentCollection.description}"></div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-photo"></div>
                         <div class="card-details">
-                            <h2 class="title details-title">Collection title</h2>
+                            <h2 class="title details-title best-collection-title"><a th:href="@{'/collection/'+${likeCollection.name}+'?id='+${likeCollection.id}}" th:text="${likeCollection.name}"></a></h2>
+                            <p class="collection-achievement" th:text="${#arrays.length(likeCollection.likes)}+' likes'"></p>
+                            <div class="collection-description" th:text="${likeCollection.description}"></div>
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-photo"></div>
                         <div class="card-details">
-                            <h2 class="title details-title">Collection title</h2>
+                            <h2 class="title details-title best-collection-title"><a th:href="@{'/collection/'+${largeCollection.name}+'?id='+${largeCollection.id}}" th:text="${largeCollection.name}"></a></h2>
+                            <p class="collection-achievement" th:text="${#arrays.length(largeCollection.items)}+' items'"></p>
+                            <div class="collection-description" th:text="${largeCollection.description}"></div>
                         </div>
                     </div>
                 </div>
@@ -42,7 +45,7 @@
 
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-xxl-3 col-lg-4 col-md-5 col-sm-7 col-8">
                 <div class="login-block mb-5">
                     <div sec:authorize="!isAuthenticated()">
                         <h2 class="title login-title">Login</h2>
@@ -94,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <div th:replace="fragment::tag-cloud"></div>
+                <div class="col-xxl-3 col-lg-4 col-md-5 col-sm-7 col-8" th:insert="fragment::tag-cloud"></div>
             </div>
         </div>
     </div>
