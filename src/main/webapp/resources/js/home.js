@@ -106,7 +106,10 @@ $('.tag-ref').click(function (event) {
     event.preventDefault();
     $.get(event.target.getAttribute('href'), {}, function (data) {
         $('#set-of-tag-cards').empty();
-        if(data===null) $('#set-of-tag-cards')[0].html("Not found");
+        if(data===null) {
+            $('#set-of-tag-cards')[0].html("Not found");
+            return;
+        }
         let template = $('#template-all-items');
         let header = $('#template-header');
         let parent = $('#set-of-tag-cards');
