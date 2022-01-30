@@ -26,6 +26,7 @@ public class CollectionServiceImpl implements CollectionService {
     private MyUserRepository userRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Collection> allCollections() {
         List<Collection> collections = new ArrayList<>();
         repository.findAll().forEach(collections::add);
@@ -33,6 +34,7 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
+    @Transactional
     public void add(Collection collection) {
         UserDetails userInfo = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         MyUser user = userRepository.findByLogin(userInfo.getUsername());
@@ -49,16 +51,19 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         repository.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Collection getById(long id) {
         return repository.findById(id).get();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Collection> findByTagId(Long id) {
         List<Collection> collections = new ArrayList<>();
         repository.findByTags(tagRepository.findById(id).get()).forEach(collections::add);
@@ -66,16 +71,19 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Collection largestCollection() {
         return repository.largestCollection();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Collection likeCollection() {
         return repository.likeCollection();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Collection commentCollection() {
         return repository.commentCollection();
     }

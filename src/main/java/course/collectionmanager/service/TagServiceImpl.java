@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TagServiceImpl implements TagService {
@@ -14,6 +15,7 @@ public class TagServiceImpl implements TagService {
     private TagRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Tag> allTags() {
         List<Tag> tags = new ArrayList<>();
         repository.findAll().forEach(tags::add);
@@ -21,6 +23,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Tag getById(long id) {
         return repository.findById(id).get();
     }

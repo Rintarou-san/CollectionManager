@@ -8,17 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LikeServiceImpl implements LikeService {
-    
+
     @Autowired
     private LikeRepository repository;
-    
+
     @Autowired
     private MyUserRepository userRepository;
-    
+
     @Override
+    @Transactional
     public void add(UserLike like) {
         UserDetails userInfo = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         MyUser user = userRepository.findByLogin(userInfo.getUsername());
@@ -36,15 +38,17 @@ public class LikeServiceImpl implements LikeService {
             repository.delete(exLike);
         }
     }
-    
+
     @Override
+    @Transactional(readOnly = true)
     public UserLike findItemLike(Long userId, Long itemId) {
         return repository.findByUserIdAndItemId(userId, itemId);
     }
-    
+
     @Override
+    @Transactional(readOnly = true)
     public UserLike findCollectionLike(Long userId, Long collectionId) {
         return repository.findByUserIdAndCollectionId(userId, collectionId);
     }
-    
+
 }

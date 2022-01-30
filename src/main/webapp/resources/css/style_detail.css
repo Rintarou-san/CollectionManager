@@ -248,6 +248,17 @@ span svg {
     position: relative;
 }
 
+.dropdown-menu li a {
+    color: var(--light-gray);
+    text-decoration: none;
+    border: none;
+    transition: all .1s linear;
+}
+.dropdown-menu li a:hover {
+    color: var(--ocean-green);
+    text-decoration: underline;
+    border: none;
+}
 
 /*End MAIN PAGE*/
 
@@ -564,8 +575,14 @@ span svg {
 .accordion-menu-item li{
     border-bottom: 1px solid transparent;
 }
+.accordion-menu-item li a{
+    text-decoration: none;
+    color: var(--dark-gray);
+    transition: all .1s linear;
+}
 .accordion-menu-item li a:hover {
-    border-bottom: 1px solid var(--ocean-green);
+    text-decoration: underline;
+    color: var(--ocean-green);
 }
 
 /*End DETAILS*/

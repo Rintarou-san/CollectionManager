@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private MyUserRepository repository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<MyUser> allUsers() {
         List<MyUser> users = new ArrayList<>();
         repository.findAll().forEach(users::add);
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean add(MyUser user) {
         if (repository.findByLogin(user.getLogin()) != null || repository.findByEmail(user.getEmail()) != null) {
             return false;
@@ -43,6 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean delete(long id) {
         if (repository.findById(id).isPresent()) {
             repository.deleteById(id);
@@ -52,6 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MyUser getById(long id) {
         return repository.findById(id).get();
     }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -18,6 +19,7 @@ public class ItemServiceImpl implements ItemService {
     private TagRepository tagRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Item> allItems() {
         List<Item> items = new ArrayList<>();
         repository.findAll().forEach(items::add);
@@ -25,6 +27,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
     public void add(Item item) {
         repository.save(item);
     }
@@ -40,11 +43,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Item getById(long id) {
         return (Item) repository.findById(id).get();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Item> findByTagId(Long id) {
         List<Item> items = new ArrayList<>();
         repository.findByTags(tagRepository.findById(id).get()).forEach(items::add);

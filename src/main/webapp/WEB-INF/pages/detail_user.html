@@ -25,7 +25,7 @@
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <ul class="accordion-menu-item">
-                                <th:block th:each="menu:${collections}">
+                                <th:block th:each="menu:${user.collections}">
                                     <li><a th:href="@{'/collection/'+${menu.name}+'?id='+${menu.id}}" th:text="${menu.name}"></a></li>
                                 </th:block>
                             </ul>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="description-block">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-5 col-lg-2">
                             <h3 class="title description-title">About me</h3>
                         </div>
                         <div class="col-1 d-flex align-items-center">
