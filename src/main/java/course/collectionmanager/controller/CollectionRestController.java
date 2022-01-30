@@ -37,15 +37,6 @@ public class CollectionRestController {
         resp.addAll(0, collections);
         resp.addAll(collections.size(), items);
         return collections != null && !collections.isEmpty() ? new ResponseEntity<>(resp, HttpStatus.OK)
-                : new ResponseEntity(HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping(value = "/collections/best")
-    public ResponseEntity<Object> bestCollections() {
-        List<Collection> collections = new ArrayList<>();
-
-        //Search...
-        return !collections.isEmpty() ? new ResponseEntity<>(collections, HttpStatus.OK)
-                : new ResponseEntity(HttpStatus.NOT_FOUND);
+                : new ResponseEntity("Empty", HttpStatus.NOT_FOUND);
     }
 }

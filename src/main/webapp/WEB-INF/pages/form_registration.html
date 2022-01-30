@@ -17,7 +17,7 @@
     </header>
     <div class="container">
         <div class="row justify-content-center py-4">
-            <div class="col-12 col-lg-9">
+            <div class="col-12 col-lg-9" id="set-of-tag-cards">
                 <div th:if="${#httpServletRequest.getParameter('message')}" class="row justify-content-center">
                         <p class="message error-message" th:text="${#httpServletRequest.getParameter('message')}"></p>
                     </div>
@@ -28,22 +28,22 @@
                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <div class="row my-3">
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="login" name="login" placeholder="Login *" required>
+                                    <input type="text" class="form-control registration-input" id="login" name="login" placeholder="Login *" required>
                                 </div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email address *" required>
+                                    <input type="text" class="form-control registration-input" id="email" name="email" placeholder="Email address *" required>
                                 </div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-12">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password *" required>
+                                    <input type="password" class="form-control registration-input" id="password" name="password" placeholder="Password *" required>
                                 </div>
                             </div>
                             <div class="row my-3">
                                 <div class="col-12">
-                                    <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" placeholder="Confirm password *" required>
+                                    <input type="password" class="form-control registration-input" id="repeatPassword" name="repeatPassword" placeholder="Confirm password *" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -52,7 +52,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <textarea class="form-control form-textarea" id="description" name="description" placeholder="If you want you can tell us about yourself..."></textarea>
+                                    <textarea class="form-control form-textarea registration-input" id="description" name="description" placeholder="If you want you can tell us about yourself..."></textarea>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -69,6 +69,26 @@
             </div>
         </div>   
     </div>
+    
+    <template id="template-all-items">
+        <div class="col-12 p-5">
+            <div class="d-flex">
+                <div class="photo"></div>
+                <div class="details">
+                    <h3 class="title details-title"><a href="" id="item-title"></a></h3>
+                    <ul class="cards-tags" id="item-tags"></ul>
+                </div>
+            </div>
+            <div class="description-block">
+                <h3 class="title description-title">Description</h3>
+                <p class="description-text" id="item-description"></p>
+            </div>
+        </div>
+    </template>
+
+    <template id="template-header">
+        <h1 class="title common-title"></h1>
+    </template>
     <script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/resources/js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/resources/js/home.js}"></script>

@@ -273,10 +273,6 @@ span svg {
     text-shadow: 3px 5px 0 rgba(0, 0, 0, .15);
 }
 
-#set-of-cards .col-12, #set-of-tag-cards .col-12 {
-    padding: 20px;
-}
-
 #set-of-cards .col-12:nth-child(even), #set-of-tag-cards .col-12:nth-child(even) {
     background: var(--light-ocean-green);
 }
@@ -694,6 +690,9 @@ span svg {
 
 .form-control::placeholder {
     color: white;
+}
+.registration-input.form-control::placeholder {
+    color: #6c757d !important;
 }
 
 @media(max-width: 992px) {
