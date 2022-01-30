@@ -19,7 +19,7 @@
                 <li><a class="all-collections" href="">All collections</a></li>
             </ul>
         </div>
-        <div class="col-9 d-none d-lg-flex">
+        <div class="col-9 d-none d-lg-flex navigation">
             <a th:href="@{/}">Main</a>
             <a href="" class="all-items">All items</a>
             <a href="" class="all-collections">All collections</a>
@@ -62,7 +62,7 @@
         <h2 class="title">Tag cloud</h2>
         <div class="tag-cloud d-flex justify-content-end flex-wrap">
             <th:block th:each="tag:${tags}">
-                <a th:href="@{'/items?tag='+${tag.id}}" th:text="${tag.name}"></a>
+                <a class="tag-ref" th:href="@{'/tags?id='+${tag.id}}" th:text="${tag.name}"></a>
             </th:block>
         </div>
     </div>

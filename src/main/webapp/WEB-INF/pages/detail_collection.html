@@ -82,7 +82,7 @@
                 </div>
                 <div class="items-block">
                    <div class="row">
-                       <div class="col-4">
+                       <div class="col-6 col-lg-4">
                            <h3 class="title description-title">Collection's items</h3>
                        </div>
                        <div class="col-1 d-flex align-items-center">
@@ -111,8 +111,8 @@
                        <th:block th:each="comment:${collection.comments}">
                            <li>
                             <div class="row">
-                                <div class="col-9 comment-user" th:text="${comment.user.login}"></div>
-                                <div class="col-3 comment-date" th:text="'Date:'+${comment.date}"></div>
+                                <div class="col-7 comment-user" th:text="${comment.user.login}"></div>
+                                <div class="col-5 comment-date" th:text="${comment.date}"></div>
                             </div>
                             <div class="row">
                                 <div class="col-12 comment-text" th:text="${comment.text}"></div>

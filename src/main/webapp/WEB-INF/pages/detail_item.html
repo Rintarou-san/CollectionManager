@@ -116,8 +116,8 @@
                        <th:block th:each="comment:${item.comments}">
                            <li>
                             <div class="row">
-                                <div class="col-9 comment-user" th:text="${comment.user.login}"></div>
-                                <div class="col-3 comment-date" th:text="'Date:'+${comment.date}"></div>
+                                <div class="col-7 comment-user" th:text="${comment.user.login}"></div>
+                                <div class="col-5 comment-date" th:text="${comment.date}"></div>
                             </div>
                             <div class="row">
                                 <div class="col-12 comment-text" th:text="${comment.text}"></div>

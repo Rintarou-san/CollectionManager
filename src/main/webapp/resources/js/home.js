@@ -102,6 +102,34 @@ $('.all-collections').click(function (event) {
     })
 })
 
+$('.tag-ref').click(function (event) {
+    event.preventDefault();
+    $.get(event.target.getAttribute('href'), {}, function (data) {
+        $('#set-of-tag-cards').empty();
+        let template = $('#template-all-items');
+        let header = $('#template-header');
+        let parent = $('#set-of-tag-cards');
+        let headerClone = header[0].content.cloneNode(true);
+        headerClone.querySelector('h1').innerHTML = `User's items and collections with tag '${event.target.name}'`;
+        parent.append(headerClone);
+        data.forEach((item) => {
+            let clone = template[0].content.cloneNode(true);
+            clone.querySelector('#item-title').innerHTML = item.name;
+            clone.querySelector('#item-title').setAttribute('href', `/collection/${item.name}?id=${item.id}`);
+            item.tags.forEach((tag) => {
+                let li = document.createElement('li');
+                let a = document.createElement('a');
+                a.innerHTML = tag.name;
+                a.setAttribute('href', `/tags/${tag.name}?id=${tag.id}`);
+                li.append(a);
+                clone.querySelector('#item-tags').append(li);
+            })
+            clone.querySelector('#item-description').innerHTML = item.description;
+            parent.append(clone);
+        })
+    })
+})
+
 $('#edit-user-description').click(function (event) {
     event.preventDefault();
     $('#save-user-description').removeAttr('hidden');
