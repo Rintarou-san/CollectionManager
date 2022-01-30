@@ -22,6 +22,7 @@
                 <h2 th:unless="${editCollection}" class="title center-title">Create new collection</h2>
                 <th:block th:if="${editCollection}">
                     <form th:action="@{/collection/edit}" method="post" th:object="${object}" class="form">
+                       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="hidden" name="id" th:value=${editCollection.id}>
                         <input type="hidden" name="user" th:value=${editCollection.user.id}>
                         <div class="row my-3">
