@@ -1,7 +1,7 @@
 package course.collectionmanager.controller;
 
 import course.collectionmanager.model.Comment;
-import course.collectionmanager.model.Field;
+import course.collectionmanager.model.ItemField;
 import course.collectionmanager.model.Item;
 import course.collectionmanager.model.UserLike;
 import course.collectionmanager.service.FieldService;
@@ -55,7 +55,7 @@ public class ItemController {
 
     @GetMapping(value = "/fields")
     public ResponseEntity<Object> allFields() {
-        List<Field> fields = fieldService.allFields();
+        List<ItemField> fields = fieldService.allFields();
         return fields != null && !fields.isEmpty() ? new ResponseEntity<>(fields, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "Field")
-public class Field {
+public class ItemField {
 
     @Id
     @Column(name = "id")

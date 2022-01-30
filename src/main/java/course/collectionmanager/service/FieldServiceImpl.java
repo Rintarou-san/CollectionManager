@@ -1,6 +1,6 @@
 package course.collectionmanager.service;
 
-import course.collectionmanager.model.Field;
+import course.collectionmanager.model.ItemField;
 import course.collectionmanager.repository.FieldRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +16,15 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Field> allFields() {
-        List<Field> fields = new ArrayList<>();
+    public List<ItemField> allFields() {
+        List<ItemField> fields = new ArrayList<>();
         repository.findAll().forEach(fields::add);
         return fields;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Field findById(long id) {
+    public ItemField findById(long id) {
         return repository.findById(id).get();
     }
 

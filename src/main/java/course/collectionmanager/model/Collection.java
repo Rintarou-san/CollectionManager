@@ -52,7 +52,7 @@ public class Collection {
     @JoinTable(name = "collection_field",
             joinColumns = @JoinColumn(name = "collectionID"),
             inverseJoinColumns = @JoinColumn(name = "fieldID"))
-    private List<Field> fields;
+    private List<ItemField> fields;
 
     @OneToMany(mappedBy = "collection")
     @JsonManagedReference

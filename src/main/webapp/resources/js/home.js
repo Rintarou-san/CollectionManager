@@ -139,6 +139,22 @@ $('.tag-ref').click(function (event) {
     })
 })
 
+$('#search-btn').click(function (event) {
+    event.preventDefault();
+    console.log($('#search-input')[0].value);
+    $.ajax({
+        url: '/items/search?='+$('#search-input')[0].value,
+        method: 'GET',
+        dataType: 'JSON',
+        success: function (data) {
+            console.log(data);
+        },
+        error: function () {
+            console.log('error');
+        }
+    })
+})
+
 $('#edit-user-description').click(function (event) {
     event.preventDefault();
     $('#save-user-description').removeAttr('hidden');
