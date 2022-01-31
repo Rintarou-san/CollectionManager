@@ -5,6 +5,7 @@
     <title th:text="'WOW! Collection - '+${item.name}"></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" th:href="@{resources/favicon.ico}" type="image/x-icon">
     <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <link th:if="${design}=='dark'" th:href="@{/resources/css/root_dark.css}" rel="stylesheet" type="text/css" />
     <link th:if="${design}=='light'" th:href="@{/resources/css/root_light.css}" rel="stylesheet" type="text/css" />
@@ -40,7 +41,7 @@
                         <h2 class="title details-title" th:text="${item.name}"></h2>
                         <ul class="tags">
                             <th:block th:each="tag:${item.tags}">
-                                <li><a th:href="@{'/tags/'+${tag.name}+'?id='+${tag.id}}" th:text="${tag.name}"></a></li>
+                                <li><a href="" th:text="${tag.name}"></a></li>
                             </th:block>
                         </ul>
                     </div>
@@ -51,8 +52,8 @@
                             <button th:unless="${item.likes.^[user.login == #authentication.getPrincipal().getUsername()]}" class="btn btn-submit btn-like">Like</button>
                         </form>
                         <th:block th:if="${item.collection.user.login}==${#authentication.getPrincipal().getUsername()}">
-                            <div class="col-4"><a th:href="@{/collection/item/edit}" class="btn btn-submit btn-style">Edit</a></div>
-                            <div class="col-4"><a th:href="@{'/collection/item/delete?id='+${item.id}}" class="btn btn-submit btn-style">Delete</a></div>
+                            <div class="col-4"><a th:href="@{'/collection/item/edit?id='+${item.id}}" class="btn btn-submit btn-style">Edit</a></div>
+                            <div class="col-4"><a th:href="@{'/items/delete?id='+${item.id}}" class="btn btn-submit btn-style">Delete</a></div>
                         </th:block>
                     </div>
                 </div>
@@ -60,10 +61,10 @@
                        <th:block th:if="${item.collection.user.login}==${#authentication.getPrincipal().getUsername()}">
                            <div class="d-flex">
                               <div class="col-7">
-                                  <a th:href="@{/collection/item/edit}" class="btn btn-submit btn-style">Edit</a>
+                                  <a th:href="@{'/collection/item/edit?id='+${item.id}}" class="btn btn-submit btn-style">Edit</a>
                               </div>
                                <div class="col-7">
-                                   <a th:href="@{'/collection/item/delete?id='+${item.id}}" class="btn btn-submit btn-style">Delete</a>
+                                   <a th:href="@{'/items/delete?id='+${item.id}}" class="btn btn-submit btn-style">Delete</a>
                                </div>
                            </div>
                         </th:block>

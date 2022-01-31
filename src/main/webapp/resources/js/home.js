@@ -64,7 +64,7 @@ $('.all-items').click(function (event) {
                 let li = document.createElement('li');
                 let a = document.createElement('a');
                 a.innerHTML = tag.name;
-                a.setAttribute('href', `/tags/${tag.name}?id=${tag.id}`);
+                a.setAttribute('class', 'tag-ref');
                 li.append(a);
                 clone.querySelector('#item-tags').append(li);
             })
@@ -92,7 +92,7 @@ $('.all-collections').click(function (event) {
                 let li = document.createElement('li');
                 let a = document.createElement('a');
                 a.innerHTML = tag.name;
-                a.setAttribute('href', `/tags/${tag.name}?id=${tag.id}`);
+                a.setAttribute('class', 'tag-ref');
                 li.append(a);
                 clone.querySelector('#item-tags').append(li);
             })
@@ -124,7 +124,7 @@ $('.tag-ref').click(function (event) {
                     let li = document.createElement('li');
                     let a = document.createElement('a');
                     a.innerHTML = tag.name;
-                    a.setAttribute('href', `/tags/${tag.name}?id=${tag.id}`);
+                    a.setAttribute('class', 'tag-ref');
                     li.append(a);
                     clone.querySelector('#item-tags').append(li);
                 })
@@ -135,22 +135,6 @@ $('.tag-ref').click(function (event) {
         error: function () {
             $('#set-of-tag-cards').empty();
             $('#set-of-tag-cards').html(`No items and collection with tag '${event.target.textContent}'`);
-        }
-    })
-})
-
-$('#search-btn').click(function (event) {
-    event.preventDefault();
-    console.log($('#search-input')[0].value);
-    $.ajax({
-        url: '/items/search?='+$('#search-input')[0].value,
-        method: 'GET',
-        dataType: 'JSON',
-        success: function (data) {
-            console.log(data);
-        },
-        error: function () {
-            console.log('error');
         }
     })
 })
@@ -172,6 +156,9 @@ $('#save-user-description').click(function (event) {
 $('#password, #repeatPassword').on('keyup', function () {
     if ($('#password').val() == $('#repeatPassword').val()) {
         $('#message').html('Matching').css('color', 'green');
-    } else
+        $('#registration-btn').removeAttr('disabled');
+    } else {
         $('#message').html('Not Matching').css('color', 'red');
+        $('#registration-btn').attr('disabled', true);
+    }
 });

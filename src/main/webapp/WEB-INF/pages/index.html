@@ -5,6 +5,7 @@
     <title>WOW! Collection</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" th:href="@{resources/favicon.ico}" type="image/x-icon">
     <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <link th:if="${design}=='dark'" th:href="@{/resources/css/root_dark.css}" rel="stylesheet" type="text/css" />
     <link th:if="${design}=='light'" th:href="@{/resources/css/root_light.css}" rel="stylesheet" type="text/css" />
@@ -51,6 +52,9 @@
                         <div class="row p-0">
                             <div th:if="${#httpServletRequest.getParameter('error')}" class="col-12 d-flex justify-content-center">
                                 <p class="message login-message error-message">Invalid username or password</p>
+                            </div>
+                            <div th:if="${#httpServletRequest.getParameter('authenticate')}" class="col-12 d-flex justify-content-center">
+                                <p class="message login-message success-message">Log in to continue</p>
                             </div>
                             <div th:if="${#httpServletRequest.getParameter('logout')}" class="col-12 d-flex justify-content-center">
                                 <p class="message login-message success-message">Success log out</p>

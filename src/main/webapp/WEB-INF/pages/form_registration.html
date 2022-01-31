@@ -5,6 +5,7 @@
     <title>WOW! Collection - Registration</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" th:href="@{resources/favicon.ico}" type="image/x-icon">
     <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <link th:if="${design}=='dark'" th:href="@{/resources/css/root_dark.css}" rel="stylesheet" type="text/css" />
     <link th:if="${design}=='light'" th:href="@{/resources/css/root_light.css}" rel="stylesheet" type="text/css" />
@@ -57,7 +58,7 @@
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-3 justify-content-center">
-                                    <button type="submit" class="btn btn-submit btn-style">Submit</button>
+                                    <button type="submit" class="btn btn-submit btn-style" id="registration-btn" disabled>Submit</button>
                                 </div>
                             </div>
                         </form>

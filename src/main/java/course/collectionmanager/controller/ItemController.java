@@ -65,4 +65,16 @@ public class ItemController {
         itemService.add(item);
         return "redirect:/user/profile";
     }
+
+    @GetMapping(value = "/delete")
+    public String delete(@RequestParam(name = "id") long id) {
+        itemService.delete(id);
+        return "redirect:/user/profile";
+    }
+
+    @PostMapping(value = "/edit")
+    public String editItem(Item item) {
+        itemService.edit(item);
+        return "redirect:/user/profile";
+    }
 }

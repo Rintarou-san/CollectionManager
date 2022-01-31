@@ -10,6 +10,7 @@ import course.collectionmanager.service.CommentService;
 import course.collectionmanager.service.CoverService;
 import course.collectionmanager.service.FieldService;
 import course.collectionmanager.service.GenreService;
+import course.collectionmanager.service.ItemService;
 import course.collectionmanager.service.JewelryService;
 import course.collectionmanager.service.LikeService;
 import course.collectionmanager.service.MetalService;
@@ -62,6 +63,9 @@ public class CollectionController {
 
     @Autowired
     private JewelryService serviceJewelry;
+
+    @Autowired
+    private ItemService itemService;
 
     @GetMapping(value = "/{title}")
     public String detail(@RequestParam(name = "id") long id, Model model, Principal principal) {
@@ -139,5 +143,20 @@ public class CollectionController {
     public String editCollection(Collection collection) {
         serviceCollection.edit(collection);
         return "redirect:/user/profile";
+    }
+
+    @GetMapping(value = "/item/edit")
+    public String editItemPage(@RequestParam(name = "id") Long id, Model model, Principal principal) {
+        String theme = principal == null ? "light" : serviceUser.findByLogin(principal.getName()).getDesign();
+        model.addAttribute("design", theme);
+        model.addAttribute("alcohol", serviceAlcohol.allAlcohols());
+        model.addAttribute("materials", serviceCover.allCovers());
+        model.addAttribute("exGenre", serviceGenre.allGenres());
+        model.addAttribute("metals", serviceMetal.allMetals());
+        model.addAttribute("jewelries", serviceJewelry.allJewelries());
+        model.addAttribute("editItem", itemService.getById(id));
+        model.addAttribute("tags", serviceTag.allTags());
+        model.addAttribute("fields", serviceField.allFields());
+        return "form_item";
     }
 }

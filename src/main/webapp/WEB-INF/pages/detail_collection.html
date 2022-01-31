@@ -5,6 +5,7 @@
     <title th:text="'WOW! Collection - '+${collection.name}"></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" th:href="@{resources/favicon.ico}" type="image/x-icon">
     <link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <link th:if="${design}=='dark'" th:href="@{/resources/css/root_dark.css}" rel="stylesheet" type="text/css" />
     <link th:if="${design}=='light'" th:href="@{/resources/css/root_light.css}" rel="stylesheet" type="text/css" />
@@ -40,7 +41,7 @@
                         <h2 class="title details-title" th:text="${collection.name}">Title</h2>
                         <ul class="tags">
                             <th:block th:each="tag:${collection.tags}">
-                                <li><a th:href="@{'/tags?id='+${tag.id}}" th:text="${tag.name}"></a></li>
+                                <li><a href="" th:text="${tag.name}"></a></li>
                             </th:block>
                         </ul>
                         <p th:text="'Author: '+${collection.user.login}"></p>

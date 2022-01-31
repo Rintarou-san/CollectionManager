@@ -34,12 +34,15 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void delete(long id) {
-
+        repository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void edit(Item item) {
-
+        Item existItem = repository.findById(item.getId()).get();
+        repository.delete(existItem);
+        repository.save(item);
     }
 
     @Override
